@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gulp Button Heroes</title>
+  <meta name="description" content="Gulp Button Heroes — turning gray rooms into heroic moments. Building warm, imaginative visitation rooms for families." />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --card2:#0f1630;
+      --text:#e9ecff;
+      --muted:#b7c0ffcc;
+      --accent:#7cf7d4;
+      --accent2:#8aa7ff;
+      --warn:#ffcc66;
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(122, 247, 212,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(138, 167, 255,.18), transparent 60%),
+        radial-gradient(700px 400px at 50% 90%, rgba(255, 204, 102,.12), transparent 65%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 16px;border:1px solid var(--border);border-radius:18px;
+      background:rgba(18,26,51,.65);backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position:sticky;top:14px;z-index:50;
+      gap:14px;
+    }
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none}
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
+      display:grid;place-items:center;
+      box-shadow: 0 10px 30px rgba(124,247,212,.12);
+      color:#081124;font-weight:900;
+      flex:0 0 auto;
+    }
+    .brand span{display:block}
+    .brand .name{font-weight:800;letter-spacing:.2px}
+    .brand .tag{font-size:12px;color:var(--muted);margin-top:1px}
+
+    .navlinks{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .navlinks a{
+      text-decoration:none;font-weight:650;font-size:14px;
+      padding:10px 12px;border-radius:12px;border:1px solid transparent;
+      color:var(--muted);
+    }
+    .navlinks a:hover{border-color:var(--border);color:var(--text);background:rgba(255,255,255,.04)}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      text-decoration:none;font-weight:750;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      cursor:pointer;
+      transition: transform .12s ease;
+      white-space:nowrap;
+    }
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
+      color:#081124;
+    }
+    .btn:hover{transform: translateY(-1px)}
+
+    .hero{
+      padding:54px 0 24px;
+      display:grid;grid-template-columns: 1.25fr .75fr;
+      gap:22px;align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
+
+    .panel{
+      border:1px solid var(--border);border-radius:22px;
+      background:rgba(18,26,51,.55);backdrop-filter: blur(10px);
+      padding:22px;box-shadow: var(--shadow);
+    }
+
+    h1{margin:0 0 10px;font-size:44px;line-height:1.08;letter-spacing:-.8px}
+    .sub{margin:0 0 18px;color:var(--muted);font-size:16px;max-width:60ch}
+
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+    .chip{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);font-weight:650;font-size:13px;
+    }
+
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+
+    .kpi{display:grid;gap:10px}
+    .kpi .item{
+      border:1px solid var(--border);border-radius:18px;
+      padding:14px;background:rgba(15,22,48,.6);
+    }
+    .kpi .num{font-weight:900;font-size:22px}
+    .kpi .lbl{color:var(--muted);font-size:13px;margin-top:2px}
+
+    .grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:14px;margin:18px 0 12px}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    .card{border:1px solid var(--border);border-radius:20px;padding:16px;background:rgba(18,26,51,.45)}
+    .card h3{margin:6px 0 6px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(124,247,212,.12);
+      display:inline-block;margin-right:8px;
+    }
+
+    .section{margin:26px 0}
+    .section h2{margin:0 0 10px;font-size:20px}
+    .section .note{color:var(--muted);margin:0 0 10px}
+
+    .list{display:grid;gap:10px}
+    .row{
+      display:flex;gap:12px;align-items:flex-start;
+      border:1px solid var(--border);border-radius:18px;
+      padding:14px;background:rgba(15,22,48,.55);
+    }
+    .row b{display:block}
+    .row small{color:var(--muted)}
+
+    footer{
+      margin:34px 0 10px;color:var(--muted);font-size:13px;
+      display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    }
+
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    /* Form Embed */
+    .embed-wrap{
+      margin-top:14px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(15,22,48,.55);
+    }
+    .embed-head{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);
+    }
+    .embed-head .left{display:flex;flex-direction:column;gap:2px}
+    .embed-head .title{font-weight:800}
+    .embed-head .hint{font-size:13px;color:var(--muted)}
+    iframe{
+      width:100%;
+      height:860px;
+      border:0;
+      background:#fff;
+    }
+    .helper{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .helper code{
+      padding:2px 4px; /* <-- fixed the weird character */
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:rgba(255,255,255,.04);
+    }
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .badge{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);font-weight:650;font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="Gulp Button Heroes home">
+        <div class="logo" aria-hidden="true">GB</div>
+        <div>
+          <span class="name">Gulp Button Heroes</span>
+          <span class="tag">Turning gray rooms into heroic moments.</span>
+        </div>
+      </a>
+
+      <div class="navlinks" aria-label="Page sections">
+        <a href="#mission">Mission</a>
+        <a href="#how">How it works</a>
+        <a href="#get-involved">Get involved</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="btn primary" href="#get-involved" title="Jump to ways to help">
+        Get involved <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="hero" id="top">
+      <div class="panel">
+        <h1><span class="dot"></span>Build joy where it’s needed most.</h1>
+        <p class="sub">
+          Gulp Button Heroes is a community-powered effort to transform visitation spaces into warm, imaginative, kid-friendly rooms—so family time feels human again.
+        </p>
+
+        <div class="chips">
+          <div class="chip">Family connection</div>
+          <div class="chip">Play-based design</div>
+          <div class="chip">Volunteer builds</div>
+          <div class="chip">Donations & materials</div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="#get-involved">Volunteer / Donate</a>
+          <a class="btn" href="#mission">Read the mission</a>
+        </div>
+
+        <div class="section" id="mission">
+          <h2>Mission</h2>
+          <p class="note">
+            Turn sterile, stressful rooms into “hero moments”: safer, brighter, more engaging spaces that support bonding and reduce anxiety.
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Make it welcoming</h3>
+              <p>Color, comfort, and layout that feels like a family room—not a checkpoint.</p>
+            </div>
+            <div class="card">
+              <h3>Make it interactive</h3>
+              <p>Simple wall activities, drawing stations, books, and toys that invite connection.</p>
+            </div>
+            <div class="card">
+              <h3>Make it sustainable</h3>
+              <p>Durable, cleanable materials and a plan for upkeep—not a one-time makeover.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="kpi">
+          <div class="item">
+            <div class="num">Phase 1</div>
+            <div class="lbl">Launch a clean, public homepage + volunteer interest intake</div>
+          </div>
+          <div class="item">
+            <div class="num">Phase 2</div>
+            <div class="lbl">Pilot room concept: low-cost, high-impact build kit</div>
+          </div>
+          <div class="item">
+            <div class="num">Phase 3</div>
+            <div class="lbl">Scale to more rooms with repeatable templates</div>
+          </div>
+        </div>
+
+        <div class="section" id="how">
+          <h2>How it works</h2>
+          <div class="list">
+            <div class="row">
+              <div aria-hidden="true">🧩</div>
+              <div>
+                <b>Design a simple room kit</b>
+                <small>Pick safe, durable pieces: wall toys, art surfaces, books, storage.</small>
+              </div>
+            </div>
+            <div class="row">
+              <div aria-hidden="true">🛠️</div>
+              <div>
+                <b>Build with volunteers</b>
+                <small>Install, organize, and test the space with real-world use in mind.</small>
+              </div>
+            </div>
+            <div class="row">
+              <div aria-hidden="true">🧼</div>
+              <div>
+                <b>Keep it clean & maintained</b>
+                <small>Document parts, cleaning routines, and replacement plans.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="contact">
+          <h2>Contact</h2>
+          <p class="note">Email: <span class="mono">gulpbuttonhero@gmail.com</span></p>
+
+          <div class="badges">
+            <span class="badge">Volunteer-ready</span>
+            <span class="badge">Donation-friendly</span>
+            <span class="badge">Room-kit blueprint</span>
+          </div>
+
+          <p class="note" style="margin-top:10px">
+            This page is a “launch pad.” More details, photos, and build kits coming next.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section" id="get-involved">
+      <h2>Get involved</h2>
+      <p class="note">
+        Best first step: fill out the volunteer interest form below. It helps route you into planning, materials, build days, or partnerships.
+      </p>
+
+      <div class="cta" style="margin-bottom:10px">
+        <a class="btn primary" id="donateBtn" href="#" target="_blank" rel="noreferrer">Donate (coming soon)</a>
+        <a class="btn" href="mailto:gulpbuttonhero@gmail.com?subject=Gulp%20Button%20Heroes%20-%20I%20want%20to%20help">Email to help</a>
+      </div>
+
+      <div class="embed-wrap">
+        <div class="embed-head">
+          <div class="left">
+            <div class="title">Volunteer Interest Form</div>
+            <div class="hint">Replace the embed URL with your Google Form embed link.</div>
+          </div>
+          <a class="btn" href="#" id="openFormBtn" target="_blank" rel="noreferrer">Open form</a>
+        </div>
+
+        <iframe
+          id="volunteerForm"
+          src="https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform?embedded=true"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Volunteer Interest Form"
+        ></iframe>
+      </div>
+
+      <div class="helper">
+        To connect your real form:
+        <ol>
+          <li>Open Google Forms → create the form.</li>
+          <li>Click <b>Send</b> → click the <b>&lt;&gt;</b> embed tab → copy the URL inside <code>src="..."</code>.</li>
+          <li>Replace the iframe <code>src</code> above.</li>
+          <li>Optionally set the “Open form” button to the normal (non-embedded) link.</li>
+        </ol>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Gulp Button Heroes</div>
+      <div class="mono">gulpbuttonheroes.com</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Add your donation URL here later (PayPal, Venmo, etc.)
+    const DONATION_URL = ""; // e.g. "https://www.paypal.com/donate/?hosted_button_id=XXXX"
+
+    const donateBtn = document.getElementById("donateBtn");
+    if (DONATION_URL) {
+      donateBtn.href = DONATION_URL;
+      donateBtn.textContent = "Donate";
+    } else {
+      donateBtn.href = "#";
+      donateBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("Donation link coming soon.");
+      });
+    }
+
+    // Optional: set your non-embedded Google Form URL here
+    const FORM_OPEN_URL = ""; // e.g. "https://docs.google.com/forms/d/e/FORM_ID/viewform"
+
+    const openFormBtn = document.getElementById("openFormBtn");
+    if (FORM_OPEN_URL) {
+      openFormBtn.href = FORM_OPEN_URL;
+    } else {
+      openFormBtn.href = "#";
+      openFormBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("Add your Google Form link here when ready.");
+      });
+    }
+  </script>
+</body>
+</html>
