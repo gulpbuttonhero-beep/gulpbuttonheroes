@@ -1,11 +1,41 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head><script 
+  src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&enable-funding=venmo&currency=USD">
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gulp Button Heroes</title>
   <meta name="description" content="Gulp Button Heroes — turning gray rooms into heroic moments. Building warm, imaginative visitation rooms for families." />
 <link rel="canonical" href="https://gulpbuttonheroes.com/" />
+<script>
+  (function () {
+    const buttons = document.querySelectorAll('.gbh-btn[data-target]');
+    const panels = document.querySelectorAll('.gbh-panel');
+
+    function hideAll() {
+      panels.forEach(p => p.hidden = true);
+      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-target');
+        const panel = document.getElementById(id);
+        if (!panel) return;
+
+        const wasHidden = panel.hidden;
+        hideAll();
+        panel.hidden = !wasHidden;
+        btn.setAttribute('aria-pressed', wasHidden ? 'true' : 'false');
+
+        if (!panel.hidden) {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>
 
 <meta property="og:title" content="Gulp Button Heroes" />
 <meta property="og:description" content="Turning gray rooms into heroic moments — building warm, imaginative visitation rooms for families." />
@@ -27,7 +57,88 @@
     }
     *{box-sizing:border-box}
     html,body
-  
+  <section id="get-involved" class="gbh-section">
+  <h2>Get Involved</h2>
+
+  <p class="gbh-lede">
+    Gulp Button Hero is a design-build mission. These rooms require coordinated expertise—trauma-sensitive design,
+    skilled fabrication, and safe installation—not only off-the-shelf products.
+  </p>
+
+  <div class="gbh-router" role="group" aria-label="Choose how you want to help">
+    <button class="gbh-btn" data-target="gbh-volunteer">Volunteer (General)</button>
+    <button class="gbh-btn" data-target="gbh-build">Design / Build / Fabrication</button>
+    <button class="gbh-btn" data-target="gbh-board">Board / Governance</button>
+    <button class="gbh-btn gbh-btn-accent" data-target="gbh-donate">Donate</button>
+  </div>
+<div id="paypal-container-9LHGEE3D59S68"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "9LHGEE3D59S68",
+  }).render("#paypal-container-9LHGEE3D59S68")
+</script>
+  <!-- Panels (hidden until clicked) -->
+  <div class="gbh-panels">
+    <div id="gbh-volunteer" class="gbh-panel" hidden>
+      <h3>Volunteer (General)</h3>
+      <p>Perfect for helping with organization, outreach, events, prep, and light build support.</p>
+
+      <!-- Replace the URL below with your Volunteer form link -->
+      <a class="gbh-linkbtn" href=`" target=s=""_blank" rel="noopener">
+        Open Volunteer Form
+      </a>
+    </div>
+
+    <div id="gbh-build" class="gbh-panel" hidden>
+      <h3>Design / Build / Fabrication</h3>
+      <p>
+        For designers, makers, builders, trades, and creative fabricators. We are building safe, durable,
+        child-centered environments—not temporary décor.
+      </p>
+
+      <!-- Replace the URL below with your Build/Design intake form link -->
+      <a class="gbh-linkbtn" href="PASTE_BUILD_FORM_URL_HERE" target="_blank" rel="noopener">
+        Open Design/Build Intake
+      </a>
+    </div>
+
+    <div id="gbh-board" class="gbh-panel" hidden>
+      <h3>Board / Governance</h3>
+      <p>
+        For serious governance support: oversight, compliance, fundraising strategy, partnerships, and accountability.
+      </p>
+
+      <!-- Replace the URL below with your Board form link -->
+      <a class="gbh-linkbtn" href="PASTE_BOARD_FORM_URL_HERE" target="_blank" rel="noopener">
+        Open Board Member Form
+      </a>
+    </div>
+
+    <div id="gbh-donate" class="gbh-panel" hidden>
+      <h3>Donate</h3>
+      <p>
+        Donations fund materials, professional design, safe installation, and durable room features that last.
+      </p>
+
+      <div class="gbh-donate-grid">
+        <!-- PayPal button/link -->
+        <a class="gbh-linkbtn" href="PASTE_PAYPAL_DONATION_LINK_HERE" target="_blank" rel="noopener">
+          Donate via PayPal
+        </a>
+
+        <!-- Bank / other link (optional) -->
+        <a class="gbh-linkbtn" href="PASTE_BANK_OR_OTHER_DONATION_LINK_HERE" target="_blank" rel="noopener">
+          Donate via Bank / Alternative
+        </a>
+      </div>
+
+      <p class="gbh-fineprint">
+        Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake and select “In-kind contribution.”
+      </p>
+    </div>
+  </div>
+</section>
+
 
 
 
@@ -204,6 +315,71 @@
     }
   </style>
 </head>
+/* GBH Router Section */
+.gbh-section { max-width: 1000px; margin: 0 auto; padding: 32px 16px; }
+.gbh-lede { font-size: 1.05rem; line-height: 1.6; margin: 12px 0 18px; }
+
+.gbh-router {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+
+.gbh-btn {
+  border: 2px solid #222;
+  background: #fff;
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.gbh-btn:hover { transform: translateY(-1px); }
+
+.gbh-btn-accent {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+.gbh-panels { margin-top: 10px; }
+
+.gbh-panel {
+  border: 2px solid #222;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 10px 0;
+  background: #fafafa;
+}
+
+.gbh-linkbtn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid #111;
+  text-decoration: none;
+  font-weight: 800;
+  color: #111;
+  background: #fff;
+}
+
+.gbh-linkbtn:hover { transform: translateY(-1px); }
+
+.gbh-donate-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gbh-fineprint {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
 
 <body>
   <img> src="gbh%20png%20image%20111.png" alt="DCYF gray room contrasted with colorful Gulp Button Hero room" style="max-width:100%; height:auto; border-radius:12px; margin:24px 0; display:block;">
