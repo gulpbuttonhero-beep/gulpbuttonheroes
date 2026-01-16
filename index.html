@@ -1,46 +1,22 @@
 <!doctype html>
 <html lang="en">
-<head><script 
-  src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&enable-funding=venmo&currency=USD">
-</script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gulp Button Heroes</title>
+
   <meta name="description" content="Gulp Button Heroes — turning gray rooms into heroic moments. Building warm, imaginative visitation rooms for families." />
-<link rel="canonical" href="https://gulpbuttonheroes.com/" />
-<script>
-  (function () {
-    const buttons = document.querySelectorAll('.gbh-btn[data-target]');
-    const panels = document.querySelectorAll('.gbh-panel');
+  <link rel="canonical" href="https://gulpbuttonheroes.com/" />
 
-    function hideAll() {
-      panels.forEach(p => p.hidden = true);
-      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
-    }
+  <meta property="og:title" content="Gulp Button Heroes" />
+  <meta property="og:description" content="Turning gray rooms into heroic moments — building warm, imaginative visitation rooms for families." />
+  <meta property="og:url" content="https://gulpbuttonheroes.com/" />
+  <meta property="og:type" content="website" />
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-target');
-        const panel = document.getElementById(id);
-        if (!panel) return;
-
-        const wasHidden = panel.hidden;
-        hideAll();
-        panel.hidden = !wasHidden;
-        btn.setAttribute('aria-pressed', wasHidden ? 'true' : 'false');
-
-        if (!panel.hidden) {
-          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  })();
-</script>
-
-<meta property="og:title" content="Gulp Button Heroes" />
-<meta property="og:description" content="Turning gray rooms into heroic moments — building warm, imaginative visitation rooms for families." />
-<meta property="og:url" content="https://gulpbuttonheroes.com/" />
-<meta property="og:type" content="website" />
+  <!-- PayPal Hosted Buttons SDK -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&enable-funding=venmo&currency=USD">
+  </script>
 
   <style>
     :root{
@@ -56,93 +32,7 @@
       --shadow: 0 20px 60px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    html,body
-  <section id="get-involved" class="gbh-section">
-  <h2>Get Involved</h2>
-
-  <p class="gbh-lede">
-    Gulp Button Hero is a design-build mission. These rooms require coordinated expertise—trauma-sensitive design,
-    skilled fabrication, and safe installation—not only off-the-shelf products.
-  </p>
-
-  <div class="gbh-router" role="group" aria-label="Choose how you want to help">
-    <button class="gbh-btn" data-target="gbh-volunteer">Volunteer (General)</button>
-    <button class="gbh-btn" data-target="gbh-build">Design / Build / Fabrication</button>
-    <button class="gbh-btn" data-target="gbh-board">Board / Governance</button>
-    <button class="gbh-btn gbh-btn-accent" data-target="gbh-donate">Donate</button>
-  </div>
-<div id="paypal-container-9LHGEE3D59S68"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "9LHGEE3D59S68",
-  }).render("#paypal-container-9LHGEE3D59S68")
-</script>
-  <!-- Panels (hidden until clicked) -->
-  <div class="gbh-panels">
-    <div id="gbh-volunteer" class="gbh-panel" hidden>
-      <h3>Volunteer (General)</h3>
-      <p>Perfect for helping with organization, outreach, events, prep, and light build support.</p>
-
-      <!-- Replace the URL below with your Volunteer form link -->
-      <a class="gbh-linkbtn" href=`" target=s=""_blank" rel="noopener">
-        Open Volunteer Form
-      </a>
-    </div>
-
-    <div id="gbh-build" class="gbh-panel" hidden>
-      <h3>Design / Build / Fabrication</h3>
-      <p>
-        For designers, makers, builders, trades, and creative fabricators. We are building safe, durable,
-        child-centered environments—not temporary décor.
-      </p>
-
-      <!-- Replace the URL below with your Build/Design intake form link -->
-      <a class="gbh-linkbtn" href="PASTE_BUILD_FORM_URL_HERE" target="_blank" rel="noopener">
-        Open Design/Build Intake
-      </a>
-    </div>
-
-    <div id="gbh-board" class="gbh-panel" hidden>
-      <h3>Board / Governance</h3>
-      <p>
-        For serious governance support: oversight, compliance, fundraising strategy, partnerships, and accountability.
-      </p>
-
-      <!-- Replace the URL below with your Board form link -->
-      <a class="gbh-linkbtn" href="PASTE_BOARD_FORM_URL_HERE" target="_blank" rel="noopener">
-        Open Board Member Form
-      </a>
-    </div>
-
-    <div id="gbh-donate" class="gbh-panel" hidden>
-      <h3>Donate</h3>
-      <p>
-        Donations fund materials, professional design, safe installation, and durable room features that last.
-      </p>
-
-      <div class="gbh-donate-grid">
-        <!-- PayPal button/link -->
-        <a class="gbh-linkbtn" href="PASTE_PAYPAL_DONATION_LINK_HERE" target="_blank" rel="noopener">
-          Donate via PayPal
-        </a>
-
-        <!-- Bank / other link (optional) -->
-        <a class="gbh-linkbtn" href="PASTE_BANK_OR_OTHER_DONATION_LINK_HERE" target="_blank" rel="noopener">
-          Donate via Bank / Alternative
-        </a>
-      </div>
-
-      <p class="gbh-fineprint">
-        Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake and select “In-kind contribution.”
-      </p>
-    </div>
-  </div>
-</section>
-
-
-
-
-
+    html,body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
@@ -291,7 +181,7 @@
     .embed-head .hint{font-size:13px;color:var(--muted)}
     iframe{
       width:100%;
-      height:860px;
+      height:1100px;
       border:0;
       background:#fff;
     }
@@ -301,7 +191,7 @@
       color:var(--muted);
     }
     .helper code{
-      padding:2px 4px; /* <-- fixed the weird character */
+      padding:2px 4px;
       border:1px solid var(--border);
       border-radius:8px;
       background:rgba(255,255,255,.04);
@@ -313,82 +203,72 @@
       background:rgba(255,255,255,.04);
       color:var(--muted);font-weight:650;font-size:13px;
     }
+
+    /* ===== GBH Router (Get Involved Buttons) ===== */
+    .gbh-section { max-width: 1000px; margin: 0 auto; padding: 12px 0 0; }
+    .gbh-lede { font-size: 1.02rem; line-height: 1.6; margin: 12px 0 18px; color: var(--muted); }
+
+    .gbh-router {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .gbh-btn {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .gbh-btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.09); }
+
+    .gbh-btn-accent{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
+      color:#081124;
+    }
+
+    .gbh-panels { margin-top: 10px; }
+    .gbh-panel {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 10px 0;
+      background: rgba(15,22,48,.60);
+    }
+    .gbh-panel h3{ margin: 6px 0 6px; }
+
+    .gbh-linkbtn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 900;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .gbh-linkbtn:hover { transform: translateY(-1px); background: rgba(255,255,255,.10); }
+
+    .gbh-fineprint {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Make hidden panels not take space */
+    [hidden]{ display:none !important; }
   </style>
 </head>
-  <style>
-
-/* GBH Router Section */
-.gbh-section { max-width: 1000px; margin: 0 auto; padding: 32px 16px; }
-.gbh-lede { font-size: 1.05rem; line-height: 1.6; margin: 12px 0 18px; }
-</style>
-
-
-.gbh-router {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 14px 0 18px;
-}
-
-.gbh-btn {
-  border: 2px solid #222;
-  background: #fff;
-  color: #111;
-  padding: 10px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.gbh-btn:hover { transform: translateY(-1px); }
-
-.gbh-btn-accent {
-  border-color: #111;
-  background: #111;
-  color: #fff;
-}
-
-.gbh-panels { margin-top: 10px; }
-
-.gbh-panel {
-  border: 2px solid #222;
-  border-radius: 14px;
-  padding: 16px;
-  margin: 10px 0;
-  background: #fafafa;
-}
-
-.gbh-linkbtn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 2px solid #111;
-  text-decoration: none;
-  font-weight: 800;
-  color: #111;
-  background: #fff;
-}
-
-.gbh-linkbtn:hover { transform: translateY(-1px); }
-
-.gbh-donate-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.gbh-fineprint {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
 
 <body>
-  <img> src="gbh%20png%20image%20111.png" alt="DCYF gray room contrasted with colorful Gulp Button Hero room" style="max-width:100%; height:auto; border-radius:12px; margin:24px 0; display:block;">
-
-
   <div class="wrap">
     <div class="nav">
       <a class="brand" href="#top" aria-label="Gulp Button Heroes home">
@@ -417,14 +297,19 @@
         <p class="sub">
           Gulp Button Heroes is a community-powered effort to transform visitation spaces into warm, imaginative, kid-friendly rooms—so family time feels human again.
         </p>
-        <img src="./gbh%20png%20image%20111.png" alt="DCYF visitation rooms: gray vs transformed Gulp Button Heroes concept" style="max-width:100%;height:auto;border-radius:12px;margin:24px 0;display:block;">
 
+        <!-- Make sure this image file exists in your repo with the same name -->
+        <img
+          src="./gbh%20png%20image%20111.png"
+          alt="DCYF visitation rooms: gray vs transformed Gulp Button Heroes concept"
+          style="max-width:100%;height:auto;border-radius:12px;margin:24px 0;display:block;"
+        />
 
         <div class="chips">
           <div class="chip">Family connection</div>
-          <div class="chip">Play-based design</div>
+          <div class="chip">Age-responsive rooms</div>
+          <div class="chip">Modular upgrades</div>
           <div class="chip">Volunteer builds</div>
-          <div class="chip">Donations & materials</div>
         </div>
 
         <div class="cta">
@@ -435,7 +320,8 @@
         <div class="section" id="mission">
           <h2>Mission</h2>
           <p class="note">
-            Turn sterile, stressful rooms into “hero moments”: safer, brighter, more engaging spaces that support bonding and reduce anxiety.
+            We transform gray, stressful visitation rooms into welcoming, kid-centered spaces that families actually want to be in.
+            Our approach is modular and age-responsive—so rooms don’t become cookie-cutter clones, and upgrades stay durable, safe, and maintainable.
           </p>
 
           <div class="grid">
@@ -444,12 +330,12 @@
               <p>Color, comfort, and layout that feels like a family room—not a checkpoint.</p>
             </div>
             <div class="card">
-              <h3>Make it interactive</h3>
-              <p>Simple wall activities, drawing stations, books, and toys that invite connection.</p>
+              <h3>Make it engaging</h3>
+              <p>Creative stations, wall activities, books, and play options that invite connection.</p>
             </div>
             <div class="card">
-              <h3>Make it sustainable</h3>
-              <p>Durable, cleanable materials and a plan for upkeep—not a one-time makeover.</p>
+              <h3>Make it durable</h3>
+              <p>Cleanable materials and a plan for upkeep—not a one-time makeover.</p>
             </div>
           </div>
         </div>
@@ -463,11 +349,11 @@
           </div>
           <div class="item">
             <div class="num">Phase 2</div>
-            <div class="lbl">Pilot room concept: low-cost, high-impact build kit</div>
+            <div class="lbl">Pilot room upgrade: fast, safe improvements that change the feel immediately</div>
           </div>
           <div class="item">
             <div class="num">Phase 3</div>
-            <div class="lbl">Scale to more rooms with repeatable templates</div>
+            <div class="lbl">Expand with modular features tailored by age group and room needs</div>
           </div>
         </div>
 
@@ -477,22 +363,22 @@
             <div class="row">
               <div aria-hidden="true">🧩</div>
               <div>
-                <b>Design a simple room kit</b>
-                <small>Pick safe, durable pieces: wall toys, art surfaces, books, storage.</small>
+                <b>Design durable modules</b>
+                <small>Safe, cleanable features: activity panels, art surfaces, books, storage, comfort.</small>
               </div>
             </div>
             <div class="row">
               <div aria-hidden="true">🛠️</div>
               <div>
-                <b>Build with volunteers</b>
-                <small>Install, organize, and test the space with real-world use in mind.</small>
+                <b>Build with volunteers + partners</b>
+                <small>Plan, fabricate, and install with real-world use in mind.</small>
               </div>
             </div>
             <div class="row">
               <div aria-hidden="true">🧼</div>
               <div>
-                <b>Keep it clean & maintained</b>
-                <small>Document parts, cleaning routines, and replacement plans.</small>
+                <b>Maintain and iterate</b>
+                <small>Document cleaning routines, replacements, and improvements based on feedback.</small>
               </div>
             </div>
           </div>
@@ -505,65 +391,104 @@
           <div class="badges">
             <span class="badge">Volunteer-ready</span>
             <span class="badge">Donation-friendly</span>
-            <span class="badge">Room-kit blueprint</span>
+            <span class="badge">Modular room upgrades</span>
           </div>
 
           <p class="note" style="margin-top:10px">
-            This page is a “launch pad.” More details, photos, and build kits coming next.
+            This page is a launch pad. More photos, partner pages, and build modules coming next.
           </p>
         </div>
       </div>
     </div>
 
+    <!-- ===== Get Involved Section (Router + Forms + PayPal) ===== -->
     <div class="panel section" id="get-involved">
       <h2>Get involved</h2>
-      <p class="note">
-        Best first step: fill out the volunteer interest form below. It helps route you into planning, materials, build days, or partnerships.
+
+      <p class="gbh-lede">
+        This is a design-build mission. These rooms require coordinated effort—child-centered design,
+        skilled fabrication, safe installation, and responsible upkeep.
       </p>
 
-      <div class="cta" style="margin-bottom:10px">
-        <a class="btn primary" id="donateBtn" href="#" target="_blank" rel="noreferrer">Donate (coming soon)</a>
-        <a class="btn" href="mailto:gulpbuttonhero@gmail.com?subject=Gulp%20Button%20Heroes%20-%20I%20want%20to%20help">Email to help</a>
+      <div class="gbh-router" role="group" aria-label="Choose how you want to help">
+        <button class="gbh-btn" type="button" data-target="gbh-volunteer">Volunteer (General)</button>
+        <button class="gbh-btn" type="button" data-target="gbh-build">Design / Build / Fabrication</button>
+        <button class="gbh-btn" type="button" data-target="gbh-board">Board / Governance</button>
+        <button class="gbh-btn gbh-btn-accent" type="button" data-target="gbh-donate">Donate</button>
       </div>
 
-      <div class="embed-wrap">
+      <div class="gbh-panels">
+        <div id="gbh-volunteer" class="gbh-panel" hidden>
+          <h3>Volunteer (General)</h3>
+          <p>Perfect for helping with organization, outreach, events, prep, and light build support.</p>
+
+          <!-- Optional: set this to your non-embedded Volunteer Form link -->
+          <a class="gbh-linkbtn" href="#" id="volunteerFormOpen" target="_blank" rel="noopener">
+            Open Volunteer Form
+          </a>
+        </div>
+
+        <div id="gbh-build" class="gbh-panel" hidden>
+          <h3>Design / Build / Fabrication</h3>
+          <p>
+            For designers, makers, builders, trades, and creative fabricators. We are building safe, durable,
+            child-centered environments—not temporary décor.
+          </p>
+
+          <!-- Replace with your Build/Design intake form link -->
+          <a class="gbh-linkbtn" href="PASTE_BUILD_FORM_URL_HERE" target="_blank" rel="noopener">
+            Open Design/Build Intake
+          </a>
+        </div>
+
+        <div id="gbh-board" class="gbh-panel" hidden>
+          <h3>Board / Governance</h3>
+          <p>
+            For serious governance support: oversight, compliance, fundraising strategy, partnerships, and accountability.
+          </p>
+
+          <!-- Replace with your Board form link -->
+          <a class="gbh-linkbtn" href="PASTE_BOARD_FORM_URL_HERE" target="_blank" rel="noopener">
+            Open Board Member Form
+          </a>
+        </div>
+
+        <div id="gbh-donate" class="gbh-panel" hidden>
+          <h3>Donate</h3>
+          <p>
+            Donations fund materials, professional design, safe installation, and durable room features that last.
+          </p>
+
+          <!-- PayPal Hosted Button render target -->
+          <div id="paypal-container-9LHGEE3D59S68" style="margin-top:12px;"></div>
+
+          <p class="gbh-fineprint">
+            Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake and select “In-kind contribution.”
+          </p>
+        </div>
+      </div>
+
+      <!-- Volunteer form embed (Google Forms) -->
+      <div class="embed-wrap" style="margin-top:18px;">
         <div class="embed-head">
           <div class="left">
             <div class="title">Volunteer Interest Form</div>
-            <div class="hint">Replace the embed URL with your Google Form embed link.</div>
+            <div class="hint">This embed is live. You can swap it anytime.</div>
           </div>
           <a class="btn" href="#" id="openFormBtn" target="_blank" rel="noreferrer">Open form</a>
         </div>
 
-        
+        <iframe
           id="volunteerForm"
-          src="https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform?embedded=true"
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdUvY6vBTtBSHpyGWjRIgxTEGteW319qR4Ys46KhOxObp-auw/viewform?embedded=true"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Volunteer Interest Form"
-        <div class="embed-wrap">
-  <div class="embed-head">
-    ...
-  </div>
-
-  <!-- -->
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdUvY6vBTtBSHpyGWjRIgxTEGteW319qR4Ys46KhOxObp-auw/viewform?embedded=true"
-          width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0" loading="lazy">
-    Loading…
-  </iframe>
-
-</div>
-
+          title="Volunteer Interest Form">
+        </iframe>
       </div>
 
       <div class="helper">
-        To connect your real form:
-        <ol>
-          <li>Open Google Forms → create the form.</li>
-          <li>Click <b>Send</b> → click the <b>&lt;&gt;</b> embed tab → copy the URL inside <code>src="..."</code>.</li>
-          <li>Replace the iframe <code>src</code> above.</li>
-          <li>Optionally set the “Open form” button to the normal (non-embedded) link.</li>
-        </ol>
+        <b>Tip:</b> To change the embed later, replace the iframe <code>src="..."</code> with your Google Form embed link.
       </div>
     </div>
 
@@ -574,36 +499,60 @@
   </div>
 
   <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Add your donation URL here later (PayPal, Venmo, etc.)
-    const DONATION_URL = ""; // e.g. "https://www.paypal.com/donate/?hosted_button_id=XXXX"
+    // Router panel toggle - run after DOM exists
+    (function () {
+      const buttons = document.querySelectorAll('.gbh-btn[data-target]');
+      const panels = document.querySelectorAll('.gbh-panel');
 
-    const donateBtn = document.getElementById("donateBtn");
-    if (DONATION_URL) {
-      donateBtn.href = DONATION_URL;
-      donateBtn.textContent = "Donate";
-    } else {
-      donateBtn.href = "#";
-      donateBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        alert("Donation link coming soon.");
+      function hideAll() {
+        panels.forEach(p => p.hidden = true);
+        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-target');
+          const panel = document.getElementById(id);
+          if (!panel) return;
+
+          const wasHidden = panel.hidden;
+          hideAll();
+          panel.hidden = !wasHidden;
+          btn.setAttribute('aria-pressed', wasHidden ? 'true' : 'false');
+
+          if (!panel.hidden) {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
       });
-    }
+    })();
+
+    // PayPal Hosted Button render
+    // This will only work if PayPal script loads successfully.
+    (function () {
+      try {
+        if (window.paypal && paypal.HostedButtons) {
+          paypal.HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
+            .render("#paypal-container-9LHGEE3D59S68");
+        }
+      } catch (e) {
+        // If it fails, it won't break the rest of the site.
+        console.warn("PayPal button render failed:", e);
+      }
+    })();
 
     // Optional: set your non-embedded Google Form URL here
-    const FORM_OPEN_URL = ""; // e.g. "https://docs.google.com/forms/d/e/FORM_ID/viewform"
+    const FORM_OPEN_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdUvY6vBTtBSHpyGWjRIgxTEGteW319qR4Ys46KhOxObp-auw/viewform";
 
     const openFormBtn = document.getElementById("openFormBtn");
-    if (FORM_OPEN_URL) {
-      openFormBtn.href = FORM_OPEN_URL;
-    } else {
-      openFormBtn.href = "#";
-      openFormBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        alert("Add your Google Form link here when ready.");
-      });
-    }
+    if (openFormBtn) openFormBtn.href = FORM_OPEN_URL;
+
+    // Optional: set Volunteer panel button link (same as FORM_OPEN_URL by default)
+    const volunteerFormOpen = document.getElementById("volunteerFormOpen");
+    if (volunteerFormOpen) volunteerFormOpen.href = FORM_OPEN_URL;
   </script>
 </body>
 </html>
