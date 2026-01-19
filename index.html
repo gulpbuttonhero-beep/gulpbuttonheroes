@@ -322,6 +322,34 @@
 
     /* Make hidden panels not take space */
     [hidden]{ display:none !important; }
+
+    /* ===== Rebus (subtle easter eggs) ===== */
+    .rebus{
+      display:inline-block;
+      margin: 0 .18em;
+      padding: 0 .25em;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-size: 0.98em;
+      line-height: 1;
+      vertical-align: baseline;
+      opacity: .92;
+      transform: translateY(-1px);
+    }
+    .rebus:hover{
+      opacity: 1;
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+    }
+    .rebus-note{
+      display:block;
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .rebus-slot{ display:inline-block; }
   </style>
 </head>
 
@@ -352,10 +380,21 @@
 
     <div class="hero" id="top">
       <div class="panel">
-        <h1><span class="dot"></span>Build joy where it’s needed most.</h1>
+        <h1>
+          <span class="dot"></span>Build joy where it’s needed most
+          <span class="rebus" title="home + heart + spark">🏠❤️⚡</span>.
+        </h1>
+
         <p class="sub">
           Gulp Button Heroes is a community-powered effort to transform visitation spaces into warm, imaginative, kid-friendly rooms—so family time feels human again.
         </p>
+
+        <div class="rebus-note">
+          Quiet message:
+          <span class="rebus" title="family + time + together">👨‍👩‍👧‍👦⏳🤝</span>
+          <span class="rebus" title="gray → color → joy">⬛➡️🎨➡️😊</span>
+          <span class="rebus-slot"></span>
+        </div>
 
         <img
           src="./gbh%20png%20image%20111.png"
@@ -368,6 +407,7 @@
           <div class="chip">Age-responsive rooms</div>
           <div class="chip">Modular upgrades</div>
           <div class="chip">Volunteer builds</div>
+          <div class="chip">Rebus mode <span aria-hidden="true" title="build + love + safe">🛠️❤️🛡️</span></div>
         </div>
 
         <div class="cta">
@@ -376,7 +416,7 @@
         </div>
 
         <div class="section" id="mission">
-          <h2>Mission</h2>
+          <h2>Mission <span class="rebus" title="target + family + room">🎯👪🚪</span></h2>
           <p class="note">
             We transform gray, stressful visitation rooms into welcoming, kid-centered spaces that families actually want to be in.
             Our approach is modular and age-responsive—so rooms don’t become cookie-cutter clones, and upgrades stay durable, safe, and maintainable.
@@ -398,7 +438,7 @@
           </div>
 
           <div class="callout">
-            <strong>Why this matters</strong>
+            <strong>Why this matters <span class="rebus" title="heart + link + light">❤️🔗💡</span></strong>
             <p>
               A visitation room is supposed to support family connection. When a room feels cold, stressful, or “institutional,” it makes a hard situation harder.
               We focus on practical changes—layout, comfort, kid-safe engagement, and durable materials—so families can spend their time bonding instead of enduring.
@@ -409,7 +449,7 @@
           </div>
 
           <div class="callout warn">
-            <strong>Spirit of reclamation</strong>
+            <strong>Spirit of reclamation <span class="rebus" title="shield + truth + care">🛡️🧾🌿</span></strong>
             <p>
               Many families carry real pain from separation. While this project is focused on improving the physical spaces where visitation happens,
               we also care about dignity, truth, and reducing unnecessary trauma—especially for kids.
@@ -438,7 +478,7 @@
         </div>
 
         <div class="section" id="how">
-          <h2>How it works</h2>
+          <h2>How it works <span class="rebus" title="puzzle + build + clean">🧩🛠️🧼</span></h2>
           <div class="list">
             <div class="row">
               <div aria-hidden="true">🧩</div>
@@ -466,7 +506,7 @@
 
         <!-- ===== NEW: DCYF LUBRICANT SECTION ===== -->
         <div class="section" id="lubricant">
-          <h2>DCYF “Lubricant” — the Low-Friction Kit</h2>
+          <h2>DCYF “Lubricant” — the Low-Friction Kit <span class="rebus" title="low friction + safe yes">🧈✅🛡️</span></h2>
           <p class="note">
             This is our facility-friendly starter package: small, safe upgrades + clear documentation
             that helps a site say “yes” without extra burden.
@@ -515,7 +555,7 @@
           </div>
 
           <div class="callout">
-            <strong>What we propose first (simple “yes” upgrades)</strong>
+            <strong>What we propose first (simple “yes” upgrades) <span class="rebus" title="small start + big change">🐣➡️🌟</span></strong>
             <p>
               A calming wall activity panel, a small book/storage nook, wipe-clean seating or soft mats (if allowed),
               and a “reset kit” that makes cleanup easy after each visit.
@@ -540,7 +580,7 @@
         </div>
 
         <div class="section" id="faq">
-          <h2>Safety & transparency</h2>
+          <h2>Safety & transparency <span class="rebus" title="shield + checklist + light">🛡️✅💡</span></h2>
           <p class="note">
             We’re serious about safety, consent, and responsible installs. These rooms serve families in sensitive situations.
             Any improvements should be durable, maintainable, and appropriate for the environment.
@@ -588,7 +628,6 @@
             </p>
           </details>
 
-          <!-- NEW OPTIONAL BUT SMART FAQ -->
           <details class="faq">
             <summary>Why do you call it the “DCYF Lubricant”?</summary>
             <p>
@@ -599,7 +638,7 @@
         </div>
 
         <div class="section" id="contact">
-          <h2>Contact</h2>
+          <h2>Contact <span class="rebus" title="mail + handshake">✉️🤝</span></h2>
           <p class="note">Email: <span class="mono">gulpbuttonhero@gmail.com</span></p>
 
           <div class="badges">
@@ -610,13 +649,14 @@
 
           <p class="note" style="margin-top:10px">
             This page is a launch pad. More photos, partner pages, and build modules coming next.
+            <span class="rebus-slot"></span>
           </p>
         </div>
       </div>
     </div>
 
     <div class="panel section" id="get-involved">
-      <h2>Get involved</h2>
+      <h2>Get involved <span class="rebus" title="hands + build + glow">👐🛠️✨</span></h2>
 
       <p class="gbh-lede">
         This is a design-build mission. These rooms require coordinated effort—child-centered design,
@@ -723,7 +763,9 @@
 
     <footer>
       <div>© <span id="year"></span> Gulp Button Heroes</div>
-      <div class="mono">gulpbuttonheroes.com</div>
+      <div class="mono">
+        gulpbuttonheroes.com <span class="rebus" title="button + hero + glow">🔘🦸✨</span>
+      </div>
     </footer>
   </div>
 
@@ -811,6 +853,38 @@
             btn.setAttribute('aria-pressed', 'false');
           }
         });
+      });
+    })();
+
+    // ===== Optional: Rebus auto-drop (fills .rebus-slot markers) =====
+    (function(){
+      const tokens = [
+        { t:"🏠❤️⚡", tip:"home + heart + spark" },
+        { t:"⬛➡️🎨➡️😊", tip:"gray → color → joy" },
+        { t:"👨‍👩‍👧‍👦⏳🤝", tip:"family + time + together" },
+        { t:"🛡️✅💡", tip:"safe + verified + clarity" },
+        { t:"🧩🛠️🧼", tip:"design + build + maintain" },
+        { t:"📚🎲🧸", tip:"books + games + comfort" },
+        { t:"🎯👪🚪", tip:"mission + family + room" },
+        { t:"🔘🦸✨", tip:"button + hero + glow" },
+        { t:"🪢🤝⬆️", tip:"rope + connection + rise" }
+      ];
+
+      const slots = Array.from(document.querySelectorAll(".rebus-slot"));
+      if (!slots.length) return;
+
+      for (let i = tokens.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tokens[i], tokens[j]] = [tokens[j], tokens[i]];
+      }
+
+      slots.forEach((slot, idx) => {
+        const tok = tokens[idx % tokens.length];
+        const span = document.createElement("span");
+        span.className = "rebus";
+        span.title = tok.tip;
+        span.textContent = tok.t;
+        slot.replaceWith(span);
       });
     })();
   </script>
