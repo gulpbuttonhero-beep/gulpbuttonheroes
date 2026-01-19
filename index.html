@@ -222,17 +222,32 @@
       color:#081124;
     }
 
-    /* NEW: Subtle "ready" glow for buttons we want to feel active even before click */
+    /* Ready glow (slightly stronger so you can actually see it) */
     .gbh-btn.gbh-btn-ready{
-      box-shadow: 0 0 0 6px rgba(124,247,212,.10);
+      box-shadow: 0 0 0 7px rgba(124,247,212,.14);
     }
 
-    /* NEW: Active state glow for whichever button is currently opened */
+    /* Medium warm halo for In-Kind (more than Volunteer/Board, less than Donate) */
+    .gbh-btn.gbh-btn-inkind{
+      box-shadow:
+        0 0 0 9px rgba(255, 204, 102, .16),
+        0 10px 24px rgba(255, 204, 102, .08);
+    }
+
+    /* Active state glow for whichever button is currently opened */
     .gbh-btn.is-active{
       border-color: transparent;
       background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
       color:#081124;
       box-shadow:
+        0 14px 38px rgba(124,247,212,.14),
+        0 10px 30px rgba(138,167,255,.10);
+    }
+
+    /* If In-Kind is active, keep the active gradient but add a warm edge */
+    .gbh-btn.gbh-btn-inkind.is-active{
+      box-shadow:
+        0 0 0 10px rgba(255, 204, 102, .18),
         0 14px 38px rgba(124,247,212,.14),
         0 10px 30px rgba(138,167,255,.10);
     }
@@ -414,9 +429,12 @@
       </p>
 
       <div class="gbh-router" role="group" aria-label="Choose how you want to help">
-        <!-- NEW: gbh-btn-ready gives subtle glow even before click -->
         <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-volunteer">Volunteer (General)</button>
         <button class="gbh-btn" type="button" data-target="gbh-build">Design / Build / Fabrication</button>
+
+        <!-- NEW: In-Kind Donations (warm medium glow) -->
+        <button class="gbh-btn gbh-btn-inkind" type="button" data-target="gbh-inkind">In-Kind Donations</button>
+
         <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-board">Board / Governance</button>
         <button class="gbh-btn gbh-btn-accent" type="button" data-target="gbh-donate">Donate</button>
       </div>
@@ -468,6 +486,24 @@
           </p>
         </div>
 
+        <!-- NEW: In-Kind Donations panel -->
+        <div id="gbh-inkind" class="gbh-panel" hidden>
+          <h3>In-Kind Donations</h3>
+          <p>
+            Want to donate materials, supplies, toys, books, paint, tools, or professional services?
+            This helps us build durable, kid-friendly rooms without wasting money.
+          </p>
+
+          <a class="gbh-linkbtn" href="#" id="inkindFormOpen" target="_blank" rel="noopener">
+            Offer an In-Kind Donation
+          </a>
+
+          <p class="gbh-fineprint">
+            Examples: paint, rollers/brushes, storage bins, wipe-clean furniture, books, games,
+            sensory items, wall panels, plywood, fasteners, and skilled labor (carpentry, electrical, design).
+          </p>
+        </div>
+
         <div id="gbh-board" class="gbh-panel" hidden>
           <h3>Board / Governance</h3>
           <p>
@@ -488,7 +524,7 @@
           <div id="paypal-container-9LHGEE3D59S68" style="margin-top:12px;"></div>
 
           <p class="gbh-fineprint">
-            Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake when it launches.
+            Prefer in-kind support (materials, fabrication, skilled labor)? Use the In-Kind option above.
           </p>
         </div>
       </div>
@@ -510,6 +546,9 @@
 
     const BOARD_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
 
+    // In-Kind: TEMP points to volunteer form until you create a dedicated In-Kind form
+    const INKIND_FORM_URL = VOLUNTEER_FORM_URL;
+
     // (Optional later) Build form:
     // const BUILD_FORM_URL = "PASTE_BUILD_FORM_URL_HERE";
 
@@ -522,6 +561,9 @@
 
     const boardFormOpen = document.getElementById("boardFormOpen");
     if (boardFormOpen) boardFormOpen.href = BOARD_FORM_URL;
+
+    const inkindFormOpen = document.getElementById("inkindFormOpen");
+    if (inkindFormOpen) inkindFormOpen.href = INKIND_FORM_URL;
 
     // Lazy-load volunteer iframe only when panel opens
     const volunteerIframe = document.getElementById("volunteerForm");
@@ -562,7 +604,7 @@
         panels.forEach(p => p.hidden = true);
         buttons.forEach(b => {
           b.setAttribute('aria-pressed', 'false');
-          b.classList.remove('is-active'); // NEW: remove active glow
+          b.classList.remove('is-active');
         });
       }
 
@@ -576,12 +618,10 @@
           hideAll();
           panel.hidden = !wasHidden;
 
-          // If we opened it, mark button as active (glowing)
           if (!panel.hidden) {
-            btn.classList.add('is-active'); // NEW
+            btn.classList.add('is-active');
             btn.setAttribute('aria-pressed', 'true');
 
-            // Special behaviors when opening panels
             if (id === "gbh-volunteer") loadVolunteerIframeIfNeeded();
             if (id === "gbh-donate") renderPaypalIfNeeded();
 
