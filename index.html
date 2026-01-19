@@ -212,7 +212,7 @@
       border-radius: 12px;
       cursor: pointer;
       font-weight: 800;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
     }
     .gbh-btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.09); }
 
@@ -220,6 +220,21 @@
       border-color: transparent;
       background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
       color:#081124;
+    }
+
+    /* NEW: Subtle "ready" glow for buttons we want to feel active even before click */
+    .gbh-btn.gbh-btn-ready{
+      box-shadow: 0 0 0 6px rgba(124,247,212,.10);
+    }
+
+    /* NEW: Active state glow for whichever button is currently opened */
+    .gbh-btn.is-active{
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
+      color:#081124;
+      box-shadow:
+        0 14px 38px rgba(124,247,212,.14),
+        0 10px 30px rgba(138,167,255,.10);
     }
 
     .gbh-panels { margin-top: 10px; }
@@ -399,9 +414,10 @@
       </p>
 
       <div class="gbh-router" role="group" aria-label="Choose how you want to help">
-        <button class="gbh-btn" type="button" data-target="gbh-volunteer">Volunteer (General)</button>
+        <!-- NEW: gbh-btn-ready gives subtle glow even before click -->
+        <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-volunteer">Volunteer (General)</button>
         <button class="gbh-btn" type="button" data-target="gbh-build">Design / Build / Fabrication</button>
-        <button class="gbh-btn" type="button" data-target="gbh-board">Board / Governance</button>
+        <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-board">Board / Governance</button>
         <button class="gbh-btn gbh-btn-accent" type="button" data-target="gbh-donate">Donate</button>
       </div>
 
@@ -537,14 +553,17 @@
       }
     }
 
-    // Router panel toggle
+    // Router panel toggle + ACTIVE BUTTON GLOW
     (function () {
       const buttons = document.querySelectorAll('.gbh-btn[data-target]');
       const panels = document.querySelectorAll('.gbh-panel');
 
       function hideAll() {
         panels.forEach(p => p.hidden = true);
-        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        buttons.forEach(b => {
+          b.setAttribute('aria-pressed', 'false');
+          b.classList.remove('is-active'); // NEW: remove active glow
+        });
       }
 
       buttons.forEach(btn => {
@@ -556,13 +575,19 @@
           const wasHidden = panel.hidden;
           hideAll();
           panel.hidden = !wasHidden;
-          btn.setAttribute('aria-pressed', wasHidden ? 'true' : 'false');
 
-          // Special behaviors when opening panels
+          // If we opened it, mark button as active (glowing)
           if (!panel.hidden) {
+            btn.classList.add('is-active'); // NEW
+            btn.setAttribute('aria-pressed', 'true');
+
+            // Special behaviors when opening panels
             if (id === "gbh-volunteer") loadVolunteerIframeIfNeeded();
             if (id === "gbh-donate") renderPaypalIfNeeded();
+
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            btn.setAttribute('aria-pressed', 'false');
           }
         });
       });
