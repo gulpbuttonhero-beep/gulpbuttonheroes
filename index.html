@@ -164,7 +164,7 @@
 
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 
-    /* Form Embed */
+    /* Form Embed (used inside Volunteer panel now) */
     .embed-wrap{
       margin-top:14px;
       border:1px solid var(--border);
@@ -185,17 +185,7 @@
       border:0;
       background:#fff;
     }
-    .helper{
-      margin-top:10px;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .helper code{
-      padding:2px 4px;
-      border:1px solid var(--border);
-      border-radius:8px;
-      background:rgba(255,255,255,.04);
-    }
+
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .badge{
       padding:8px 10px;border-radius:999px;
@@ -205,7 +195,6 @@
     }
 
     /* ===== GBH Router (Get Involved Buttons) ===== */
-    .gbh-section { max-width: 1000px; margin: 0 auto; padding: 12px 0 0; }
     .gbh-lede { font-size: 1.02rem; line-height: 1.6; margin: 12px 0 18px; color: var(--muted); }
 
     .gbh-router {
@@ -298,7 +287,6 @@
           Gulp Button Heroes is a community-powered effort to transform visitation spaces into warm, imaginative, kid-friendly rooms—so family time feels human again.
         </p>
 
-        <!-- Make sure this image file exists in your repo with the same name -->
         <img
           src="./gbh%20png%20image%20111.png"
           alt="DCYF visitation rooms: gray vs transformed Gulp Button Heroes concept"
@@ -418,14 +406,34 @@
       </div>
 
       <div class="gbh-panels">
+        <!-- Volunteer panel now CONTAINS the embed -->
         <div id="gbh-volunteer" class="gbh-panel" hidden>
           <h3>Volunteer (General)</h3>
           <p>Perfect for helping with organization, outreach, events, prep, and light build support.</p>
 
-          <!-- Optional: set this to your non-embedded Volunteer Form link -->
           <a class="gbh-linkbtn" href="#" id="volunteerFormOpen" target="_blank" rel="noopener">
             Open Volunteer Form
           </a>
+
+          <div class="embed-wrap">
+            <div class="embed-head">
+              <div class="left">
+                <div class="title">Volunteer Interest Form</div>
+                <div class="hint">Fill this out to join the volunteer pool.</div>
+              </div>
+              <a class="btn" href="#" id="openFormBtn" target="_blank" rel="noreferrer">Open form</a>
+            </div>
+
+            <!-- Lazy-load the iframe so it loads only when panel opens -->
+            <iframe
+              id="volunteerForm"
+              src="about:blank"
+              data-src=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Volunteer Interest Form">
+            </iframe>
+          </div>
         </div>
 
         <div id="gbh-build" class="gbh-panel" hidden>
@@ -435,10 +443,13 @@
             child-centered environments—not temporary décor.
           </p>
 
-          <!-- Replace with your Build/Design intake form link -->
-          <a class="gbh-linkbtn" href="PASTE_BUILD_FORM_URL_HERE" target="_blank" rel="noopener">
-            Open Design/Build Intake
+          <a class="gbh-linkbtn" href="#" id="buildFormOpen" target="_blank" rel="noopener">
+            Design/Build Intake (Coming soon)
           </a>
+
+          <p class="gbh-fineprint">
+            We’re finalizing the Design/Build intake form. For now, use the Volunteer form and select “Design/Build” in interests.
+          </p>
         </div>
 
         <div id="gbh-board" class="gbh-panel" hidden>
@@ -447,9 +458,8 @@
             For serious governance support: oversight, compliance, fundraising strategy, partnerships, and accountability.
           </p>
 
-          <!-- Replace with your Board form link -->
-          <a class="gbh-linkbtn" href="PASTE_BOARD_FORM_URL_HERE" target="_blank" rel="noopener">
-            Open Board Member Form
+          <a class="gbh-linkbtn" href="#" id="boardFormOpen" target="_blank" rel="noopener">
+            Open Board / Governance Form
           </a>
         </div>
 
@@ -459,36 +469,12 @@
             Donations fund materials, professional design, safe installation, and durable room features that last.
           </p>
 
-          <!-- PayPal Hosted Button render target -->
           <div id="paypal-container-9LHGEE3D59S68" style="margin-top:12px;"></div>
 
           <p class="gbh-fineprint">
-            Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake and select “In-kind contribution.”
+            Prefer in-kind support (materials, fabrication, skilled labor)? Use the Design/Build Intake when it launches.
           </p>
         </div>
-      </div>
-
-      <!-- Volunteer form embed (Google Forms) -->
-      <div class="embed-wrap" style="margin-top:18px;">
-        <div class="embed-head">
-          <div class="left">
-            <div class="title">Volunteer Interest Form</div>
-            <div class="hint">This embed is live. You can swap it anytime.</div>
-          </div>
-          <a class="btn" href="#" id="openFormBtn" target="_blank" rel="noreferrer">Open form</a>
-        </div>
-
-        <iframe
-          id="volunteerForm"
-          src="https://docs.google.com/forms/d/e/1FAIpQLSdUvY6vBTtBSHpyGWjRIgxTEGteW319qR4Ys46KhOxObp-auw/viewform?embedded=true"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Volunteer Interest Form">
-        </iframe>
-      </div>
-
-      <div class="helper">
-        <b>Tip:</b> To change the embed later, replace the iframe <code>src="..."</code> with your Google Form embed link.
       </div>
     </div>
 
@@ -502,7 +488,56 @@
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Router panel toggle - run after DOM exists
+    // ===== Form URLs (single source of truth) =====
+    const VOLUNTEER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform";
+    const VOLUNTEER_EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform?embedded=true";
+
+    const BOARD_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
+
+    // (Optional later) Build form:
+    // const BUILD_FORM_URL = "PASTE_BUILD_FORM_URL_HERE";
+
+    // Wire buttons to URLs
+    const openFormBtn = document.getElementById("openFormBtn");
+    if (openFormBtn) openFormBtn.href = VOLUNTEER_FORM_URL;
+
+    const volunteerFormOpen = document.getElementById("volunteerFormOpen");
+    if (volunteerFormOpen) volunteerFormOpen.href = VOLUNTEER_FORM_URL;
+
+    const boardFormOpen = document.getElementById("boardFormOpen");
+    if (boardFormOpen) boardFormOpen.href = BOARD_FORM_URL;
+
+    // Lazy-load volunteer iframe only when panel opens
+    const volunteerIframe = document.getElementById("volunteerForm");
+    if (volunteerIframe) {
+      volunteerIframe.setAttribute("data-src", VOLUNTEER_EMBED_URL);
+    }
+
+    function loadVolunteerIframeIfNeeded() {
+      if (!volunteerIframe) return;
+      const currentSrc = volunteerIframe.getAttribute("src") || "";
+      if (currentSrc === "about:blank") {
+        const ds = volunteerIframe.getAttribute("data-src");
+        if (ds) volunteerIframe.setAttribute("src", ds);
+      }
+    }
+
+    // PayPal Hosted Button render only when Donate panel opens
+    let paypalRendered = false;
+    function renderPaypalIfNeeded() {
+      if (paypalRendered) return;
+      try {
+        if (window.paypal && paypal.HostedButtons) {
+          paypal.HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
+            .render("#paypal-container-9LHGEE3D59S68");
+          paypalRendered = true;
+        }
+      } catch (e) {
+        console.warn("PayPal button render failed:", e);
+      }
+    }
+
+    // Router panel toggle
     (function () {
       const buttons = document.querySelectorAll('.gbh-btn[data-target]');
       const panels = document.querySelectorAll('.gbh-panel');
@@ -523,36 +558,15 @@
           panel.hidden = !wasHidden;
           btn.setAttribute('aria-pressed', wasHidden ? 'true' : 'false');
 
+          // Special behaviors when opening panels
           if (!panel.hidden) {
+            if (id === "gbh-volunteer") loadVolunteerIframeIfNeeded();
+            if (id === "gbh-donate") renderPaypalIfNeeded();
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         });
       });
     })();
-
-    // PayPal Hosted Button render
-    // This will only work if PayPal script loads successfully.
-    (function () {
-      try {
-        if (window.paypal && paypal.HostedButtons) {
-          paypal.HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
-            .render("#paypal-container-9LHGEE3D59S68");
-        }
-      } catch (e) {
-        // If it fails, it won't break the rest of the site.
-        console.warn("PayPal button render failed:", e);
-      }
-    })();
-
-    // Optional: set your non-embedded Google Form URL here
-    const FORM_OPEN_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdUvY6vBTtBSHpyGWjRIgxTEGteW319qR4Ys46KhOxObp-auw/viewform";
-
-    const openFormBtn = document.getElementById("openFormBtn");
-    if (openFormBtn) openFormBtn.href = FORM_OPEN_URL;
-
-    // Optional: set Volunteer panel button link (same as FORM_OPEN_URL by default)
-    const volunteerFormOpen = document.getElementById("volunteerFormOpen");
-    if (volunteerFormOpen) volunteerFormOpen.href = FORM_OPEN_URL;
   </script>
 </body>
 </html>
