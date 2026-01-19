@@ -282,6 +282,44 @@
       color: var(--muted);
     }
 
+    /* ===== NEW: Callouts + FAQ ===== */
+    .callout{
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(15,22,48,.60);
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+      margin-top:14px;
+    }
+    .callout strong{display:block;margin-bottom:6px}
+    .callout p{margin:0;color:var(--muted)}
+    .callout .mini{margin-top:10px;font-size:13px;color:var(--muted)}
+    .callout.warn{
+      border-color: rgba(255,204,102,.35);
+      background: radial-gradient(600px 240px at 20% 20%, rgba(255,204,102,.12), rgba(15,22,48,.60));
+    }
+
+    details.faq{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:12px 14px;
+      background:rgba(15,22,48,.55);
+      margin:10px 0;
+    }
+    details.faq summary{
+      cursor:pointer;
+      font-weight:850;
+      list-style:none;
+    }
+    details.faq summary::-webkit-details-marker{display:none}
+    details.faq p{margin:10px 0 0;color:var(--muted)}
+    details.faq ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+    details.faq li{margin:6px 0}
+    .hr{
+      height:1px;background:rgba(255,255,255,.10);
+      margin:14px 0;
+    }
+
     /* Make hidden panels not take space */
     [hidden]{ display:none !important; }
   </style>
@@ -302,6 +340,7 @@
         <a href="#mission">Mission</a>
         <a href="#how">How it works</a>
         <a href="#get-involved">Get involved</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -356,6 +395,30 @@
               <p>Cleanable materials and a plan for upkeep—not a one-time makeover.</p>
             </div>
           </div>
+
+          <!-- NEW: Why this matters -->
+          <div class="callout">
+            <strong>Why this matters</strong>
+            <p>
+              A visitation room is supposed to support family connection. When a room feels cold, stressful, or “institutional,” it makes a hard situation harder.
+              We focus on practical changes—layout, comfort, kid-safe engagement, and durable materials—so families can spend their time bonding instead of enduring.
+            </p>
+            <div class="mini">
+              We’re building a positive, constructive path: design, build, install, maintain, repeat.
+            </div>
+          </div>
+
+          <!-- NEW: Reclamation / reunification tone, kept clean -->
+          <div class="callout warn">
+            <strong>Spirit of reclamation</strong>
+            <p>
+              Many families carry real pain from separation. While this project is focused on improving the physical spaces where visitation happens,
+              we also care about dignity, truth, and reducing unnecessary trauma—especially for kids.
+            </p>
+            <div class="mini">
+              This site is a volunteer and support hub. For legal or case-specific help, please consult a qualified professional or local resources.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -402,6 +465,57 @@
           </div>
         </div>
 
+        <!-- NEW: Safety & transparency -->
+        <div class="section" id="faq">
+          <h2>Safety & transparency</h2>
+          <p class="note">
+            We’re serious about safety, consent, and responsible installs. These rooms serve families in sensitive situations.
+            Any improvements should be durable, maintainable, and appropriate for the environment.
+          </p>
+
+          <div class="hr"></div>
+
+          <details class="faq">
+            <summary>Are you affiliated with DCYF / CPS?</summary>
+            <p>
+              Not by default. This is a community-led volunteer effort. Any collaboration with agencies or facilities would require
+              formal permission, coordination, and safety standards.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>What kinds of upgrades are you talking about?</summary>
+            <p>
+              Practical, durable improvements: wipe-clean furniture, storage, kid-safe activity panels, books, calming color, art surfaces,
+              modular features designed for easy maintenance and replacement.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>How do you handle donations (money or materials)?</summary>
+            <p>
+              Monetary donations go through the Donate button on this page. In-kind donations (materials/supplies/services) go through the In-Kind form.
+              We aim to be transparent, avoid waste, and prioritize safe, useful items.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>Can I donate used toys or furniture?</summary>
+            <p>
+              Sometimes—if items are clean, safe, and appropriate. Many facilities have strict hygiene and safety rules. The In-Kind form helps us
+              screen items and coordinate what’s actually usable.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>Do you provide legal help or case advocacy?</summary>
+            <p>
+              This project is focused on improving visitation spaces. We can help connect people, share resources, and build community support—but we do not provide legal advice.
+              For case-specific guidance, consult a qualified professional or local services.
+            </p>
+          </details>
+        </div>
+
         <div class="section" id="contact">
           <h2>Contact</h2>
           <p class="note">Email: <span class="mono">gulpbuttonhero@gmail.com</span></p>
@@ -432,7 +546,6 @@
         <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-volunteer">Volunteer (General)</button>
         <button class="gbh-btn" type="button" data-target="gbh-build">Design / Build / Fabrication</button>
 
-        <!-- NEW: In-Kind Donations (warm medium glow) -->
         <button class="gbh-btn gbh-btn-inkind" type="button" data-target="gbh-inkind">In-Kind Donations</button>
 
         <button class="gbh-btn gbh-btn-ready" type="button" data-target="gbh-board">Board / Governance</button>
@@ -440,7 +553,6 @@
       </div>
 
       <div class="gbh-panels">
-        <!-- Volunteer panel now CONTAINS the embed -->
         <div id="gbh-volunteer" class="gbh-panel" hidden>
           <h3>Volunteer (General)</h3>
           <p>Perfect for helping with organization, outreach, events, prep, and light build support.</p>
@@ -458,7 +570,6 @@
               <a class="btn" href="#" id="openFormBtn" target="_blank" rel="noreferrer">Open form</a>
             </div>
 
-            <!-- Lazy-load the iframe so it loads only when panel opens -->
             <iframe
               id="volunteerForm"
               src="about:blank"
@@ -486,7 +597,6 @@
           </p>
         </div>
 
-        <!-- NEW: In-Kind Donations panel -->
         <div id="gbh-inkind" class="gbh-panel" hidden>
           <h3>In-Kind Donations</h3>
           <p>
@@ -537,7 +647,6 @@
   </div>
 
   <script>
-    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // ===== Form URLs (single source of truth) =====
@@ -546,12 +655,7 @@
 
     const BOARD_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
 
-    // In-Kind: TEMP points to volunteer form until you create a dedicated In-Kind form
     const INKIND_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSOrfOur1i5gGyViGC1RMWjXZNxHtAW47BprWI7BiiU9k9xQ/viewform";
-
-
-    // (Optional later) Build form:
-    // const BUILD_FORM_URL = "PASTE_BUILD_FORM_URL_HERE";
 
     // Wire buttons to URLs
     const openFormBtn = document.getElementById("openFormBtn");
