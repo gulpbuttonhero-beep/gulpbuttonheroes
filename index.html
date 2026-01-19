@@ -13,9 +13,9 @@
   <meta property="og:url" content="https://gulpbuttonheroes.com/" />
   <meta property="og:type" content="website" />
 
-  <!-- PayPal Hosted Buttons SDK -->
+  <!-- PayPal Hosted Buttons SDK (Venmo REMOVED) -->
   <script
-    src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&enable-funding=venmo&currency=USD">
+    src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&currency=USD">
   </script>
 
   <style>
@@ -396,7 +396,6 @@
             </div>
           </div>
 
-          <!-- NEW: Why this matters -->
           <div class="callout">
             <strong>Why this matters</strong>
             <p>
@@ -408,7 +407,6 @@
             </div>
           </div>
 
-          <!-- NEW: Reclamation / reunification tone, kept clean -->
           <div class="callout warn">
             <strong>Spirit of reclamation</strong>
             <p>
@@ -465,7 +463,6 @@
           </div>
         </div>
 
-        <!-- NEW: Safety & transparency -->
         <div class="section" id="faq">
           <h2>Safety & transparency</h2>
           <p class="note">
@@ -533,7 +530,6 @@
       </div>
     </div>
 
-    <!-- ===== Get Involved Section (Router + Forms + PayPal) ===== -->
     <div class="panel section" id="get-involved">
       <h2>Get involved</h2>
 
@@ -649,7 +645,6 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Form URLs (single source of truth) =====
     const VOLUNTEER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform";
     const VOLUNTEER_EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform?embedded=true";
 
@@ -657,7 +652,6 @@
 
     const INKIND_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSOrfOur1i5gGyViGC1RMWjXZNxHtAW47BprWI7BiiU9k9xQ/viewform";
 
-    // Wire buttons to URLs
     const openFormBtn = document.getElementById("openFormBtn");
     if (openFormBtn) openFormBtn.href = VOLUNTEER_FORM_URL;
 
@@ -670,7 +664,6 @@
     const inkindFormOpen = document.getElementById("inkindFormOpen");
     if (inkindFormOpen) inkindFormOpen.href = INKIND_FORM_URL;
 
-    // Lazy-load volunteer iframe only when panel opens
     const volunteerIframe = document.getElementById("volunteerForm");
     if (volunteerIframe) {
       volunteerIframe.setAttribute("data-src", VOLUNTEER_EMBED_URL);
@@ -685,7 +678,6 @@
       }
     }
 
-    // PayPal Hosted Button render only when Donate panel opens
     let paypalRendered = false;
     function renderPaypalIfNeeded() {
       if (paypalRendered) return;
@@ -700,7 +692,6 @@
       }
     }
 
-    // Router panel toggle + ACTIVE BUTTON GLOW
     (function () {
       const buttons = document.querySelectorAll('.gbh-btn[data-target]');
       const panels = document.querySelectorAll('.gbh-panel');
