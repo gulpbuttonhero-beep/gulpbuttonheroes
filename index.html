@@ -350,6 +350,44 @@
       color: var(--muted);
     }
     .rebus-slot{ display:inline-block; }
+
+    /* ===== NEW: Fill-the-gap Action Dock (keeps left column “useful” on desktop) ===== */
+    .dock{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(15,22,48,.60);
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+    }
+    .dock h3{margin:0 0 8px;font-size:16px}
+    .dock p{margin:0;color:var(--muted);font-size:14px}
+    .dock-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 900px){
+      .dock-grid{grid-template-columns:1fr}
+    }
+    .dock-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:12px;
+      background:rgba(18,26,51,.35);
+    }
+    .dock-card b{display:block;margin-bottom:6px}
+    .dock-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn.warm{
+      border-color: rgba(255,204,102,.25);
+      background: radial-gradient(600px 240px at 20% 20%, rgba(255,204,102,.12), rgba(255,255,255,.04));
+    }
   </style>
 </head>
 
@@ -458,6 +496,54 @@
               This site is a volunteer and support hub. For legal or case-specific help, please consult a qualified professional or local resources.
             </div>
           </div>
+
+          <!-- ===== NEW: Fill-the-gap content so left column stays useful on desktop ===== -->
+          <div class="dock" id="quick-actions">
+            <h3>Quick actions <span class="rebus" title="hands + build + go">👐🛠️➡️</span></h3>
+            <p>
+              Want to help right now? Pick one lane: volunteer time, donate materials, or request a facility walkthrough.
+            </p>
+
+            <div class="dock-grid">
+              <div class="dock-card">
+                <b>Fastest way to support</b>
+                <p>Jump to the action buttons (Volunteer / In-Kind / Board / Donate).</p>
+                <div class="dock-actions">
+                  <a class="btn primary" href="#get-involved">Open Get Involved</a>
+                  <a class="btn" href="#lubricant">See Low-Friction Kit</a>
+                </div>
+              </div>
+
+              <div class="dock-card">
+                <b>Request a site walkthrough</b>
+                <p>Opens a drafted email in Gmail so it’s easy to send.</p>
+                <div class="dock-actions">
+                  <a
+                    class="btn warm"
+                    target="_blank"
+                    rel="noopener"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=gulpbuttonhero@gmail.com&su=Gulp%20Button%20Heroes%20%E2%80%94%20Request%20a%20Site%20Walkthrough&body=Hello%20Gulp%20Button%20Heroes%2C%0A%0AI%20found%20your%20site%20and%20would%20like%20to%20request%20a%20short%20walkthrough%20conversation%20about%20the%20DCYF%20Low-Friction%20Kit%20and%20how%20a%20pilot%20upgrade%20could%20work%20in%20a%20visitation%20space.%0A%0AFacility%2FOffice%20name%3A%20%0ALocation%20(city)%3A%20%0ABest%20contact%20name%3A%20%0ABest%20phone%2Femail%3A%20%0A%0AAny%20constraints%20we%20should%20know%20about%20(cleaning%20rules%2C%20mounting%20rules%2C%20scheduling)%3A%20%0A%0AThank%20you%2C%0A"
+                    title="Open Gmail compose with a prefilled message"
+                  >
+                    Request Walkthrough (Gmail) <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout" style="margin-top:12px">
+              <strong>What we build first (the “easy yes” list) <span class="rebus" title="small start + strong finish">🐣➡️🧱</span></strong>
+              <p>
+                One durable wall activity panel, one small book/storage nook, one wipe-clean comfort upgrade, and a simple reset kit
+                (wipes, storage, labeled bins) — plus a short cleaning + maintenance sheet.
+              </p>
+              <div class="mini">
+                The goal: a pilot that’s safe, clean, documented, and repeatable.
+              </div>
+            </div>
+          </div>
+          <!-- ===== END NEW DOCK ===== -->
+
         </div>
       </div>
 
@@ -504,7 +590,7 @@
           </div>
         </div>
 
-        <!-- ===== NEW: DCYF LUBRICANT SECTION ===== -->
+        <!-- ===== DCYF LUBRICANT SECTION ===== -->
         <div class="section" id="lubricant">
           <h2>DCYF “Lubricant” — the Low-Friction Kit <span class="rebus" title="low friction + safe yes">🧈✅🛡️</span></h2>
           <p class="note">
@@ -565,17 +651,19 @@
             </div>
           </div>
 
-          <!-- Prefilled email button -->
+          <!-- Gmail compose button (reliable) -->
           <a
             class="btn primary"
-            href="mailto:gulpbuttonhero@gmail.com?subject=Gulp%20Button%20Heroes%20—%20Request%20a%20Site%20Walkthrough&body=Hello%20Gulp%20Button%20Heroes%2C%0A%0AI%20found%20your%20site%20and%20would%20like%20to%20request%20a%20short%20walkthrough%20conversation%20about%20the%20DCYF%20Low-Friction%20Kit%20and%20how%20a%20pilot%20upgrade%20could%20work%20in%20a%20visitation%20space.%0A%0AFacility%2FOffice%20name%3A%20%0ALocation%20(city)%3A%20%0ABest%20contact%20name%3A%20%0ABest%20phone%2Femail%3A%20%0A%0AAny%20constraints%20we%20should%20know%20about%20(cleaning%20rules%2C%20mounting%20rules%2C%20scheduling)%3A%20%0A%0AThank%20you%2C%0A"
-            title="Email us with a prefilled request"
+            target="_blank"
+            rel="noopener"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=gulpbuttonhero@gmail.com&su=Gulp%20Button%20Heroes%20%E2%80%94%20Request%20a%20Site%20Walkthrough&body=Hello%20Gulp%20Button%20Heroes%2C%0A%0AI%20found%20your%20site%20and%20would%20like%20to%20request%20a%20short%20walkthrough%20conversation%20about%20the%20DCYF%20Low-Friction%20Kit%20and%20how%20a%20pilot%20upgrade%20could%20work%20in%20a%20visitation%20space.%0A%0AFacility%2FOffice%20name%3A%20%0ALocation%20(city)%3A%20%0ABest%20contact%20name%3A%20%0ABest%20phone%2Femail%3A%20%0A%0AAny%20constraints%20we%20should%20know%20about%20(cleaning%20rules%2C%20mounting%20rules%2C%20scheduling)%3A%20%0A%0AThank%20you%2C%0A"
+            title="Open Gmail compose with a prefilled request"
           >
             Request a Site Walkthrough <span aria-hidden="true">→</span>
           </a>
 
           <p class="gbh-fineprint">
-            This email button just pre-fills a message in your mail app. You can edit anything before sending.
+            This opens a drafted email in Gmail in a new tab. You can edit anything before sending.
           </p>
         </div>
 
