@@ -858,123 +858,177 @@
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  // ===== Footer year =====
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const VOLUNTEER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform";
-    const VOLUNTEER_EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform?embedded=true";
+  // ===== Forms =====
+  const VOLUNTEER_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform";
+  const VOLUNTEER_EMBED_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform?embedded=true";
 
-    const BOARD_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
+  const BOARD_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
 
-    const INKIND_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSOrfOur1i5gGyViGC1RMWjXZNxHtAW47BprWI7BiiU9k9xQ/viewform";
+  const INKIND_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfSOrfOur1i5gGyViGC1RMWjXZNxHtAW47BprWI7BiiU9k9xQ/viewform";
 
-    const openFormBtn = document.getElementById("openFormBtn");
-    if (openFormBtn) openFormBtn.href = VOLUNTEER_FORM_URL;
+  const openFormBtn = document.getElementById("openFormBtn");
+  if (openFormBtn) openFormBtn.href = VOLUNTEER_FORM_URL;
 
-    const volunteerFormOpen = document.getElementById("volunteerFormOpen");
-    if (volunteerFormOpen) volunteerFormOpen.href = VOLUNTEER_FORM_URL;
+  const volunteerFormOpen = document.getElementById("volunteerFormOpen");
+  if (volunteerFormOpen) volunteerFormOpen.href = VOLUNTEER_FORM_URL;
 
-    const boardFormOpen = document.getElementById("boardFormOpen");
-    if (boardFormOpen) boardFormOpen.href = BOARD_FORM_URL;
+  const boardFormOpen = document.getElementById("boardFormOpen");
+  if (boardFormOpen) boardFormOpen.href = BOARD_FORM_URL;
 
-    const inkindFormOpen = document.getElementById("inkindFormOpen");
-    if (inkindFormOpen) inkindFormOpen.href = INKIND_FORM_URL;
+  const inkindFormOpen = document.getElementById("inkindFormOpen");
+  if (inkindFormOpen) inkindFormOpen.href = INKIND_FORM_URL;
 
-    const volunteerIframe = document.getElementById("volunteerForm");
-    if (volunteerIframe) {
-      volunteerIframe.setAttribute("data-src", VOLUNTEER_EMBED_URL);
+  const volunteerIframe = document.getElementById("volunteerForm");
+  if (volunteerIframe) {
+    volunteerIframe.setAttribute("data-src", VOLUNTEER_EMBED_URL);
+  }
+
+  function loadVolunteerIframeIfNeeded() {
+    if (!volunteerIframe) return;
+    const currentSrc = volunteerIframe.getAttribute("src") || "";
+    if (currentSrc === "about:blank") {
+      const ds = volunteerIframe.getAttribute("data-src");
+      if (ds) volunteerIframe.setAttribute("src", ds);
+    }
+  }
+
+  // ===== PayPal Hosted Buttons: render + retry + fallback =====
+  let paypalRendered = false;
+
+  function renderPaypalIfNeeded() {
+    if (paypalRendered) return;
+
+    const containerSel = "#paypal-container-9LHGEE3D59S68";
+    const container = document.querySelector(containerSel);
+    if (!container) return;
+
+    // If it already rendered once (e.g., hot reload), don't double-render.
+    if (container.dataset.rendered === "1") {
+      paypalRendered = true;
+      return;
     }
 
-    function loadVolunteerIframeIfNeeded() {
-      if (!volunteerIframe) return;
-      const currentSrc = volunteerIframe.getAttribute("src") || "";
-      if (currentSrc === "about:blank") {
-        const ds = volunteerIframe.getAttribute("data-src");
-        if (ds) volunteerIframe.setAttribute("src", ds);
-      }
-    }
+    let tries = 0;
+    const maxTries = 20; // ~5 seconds total
+    const delayMs = 250;
 
-    let paypalRendered = false;
-    function renderPaypalIfNeeded() {
-      if (paypalRendered) return;
+    const fallback = () => {
+      container.innerHTML = `
+        <a class="gbh-linkbtn"
+           href="https://www.paypal.com/donate/?hosted_button_id=9LHGEE3D59S68"
+           target="_blank" rel="noopener">
+          Open PayPal Donate
+        </a>
+        <p class="gbh-fineprint">
+          If the embedded button didn’t load (privacy settings, blockers, or a PayPal hiccup),
+          this link always works.
+        </p>
+      `;
+    };
+
+    const attempt = () => {
       try {
         if (window.paypal && paypal.HostedButtons) {
-          paypal.HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
-            .render("#paypal-container-9LHGEE3D59S68");
+          window.paypal
+            .HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
+            .render(containerSel);
+
+          container.dataset.rendered = "1";
           paypalRendered = true;
+          return;
         }
       } catch (e) {
         console.warn("PayPal button render failed:", e);
+        fallback();
+        return;
       }
+
+      tries += 1;
+      if (tries >= maxTries) fallback();
+      else setTimeout(attempt, delayMs);
+    };
+
+    attempt();
+  }
+
+  // ===== Router buttons for Get Involved panels =====
+  (function () {
+    const buttons = document.querySelectorAll(".gbh-btn[data-target]");
+    const panels = document.querySelectorAll(".gbh-panel");
+
+    function hideAll() {
+      panels.forEach((p) => (p.hidden = true));
+      buttons.forEach((b) => {
+        b.setAttribute("aria-pressed", "false");
+        b.classList.remove("is-active");
+      });
     }
 
-    (function () {
-      const buttons = document.querySelectorAll('.gbh-btn[data-target]');
-      const panels = document.querySelectorAll('.gbh-panel');
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-target");
+        const panel = document.getElementById(id);
+        if (!panel) return;
 
-      function hideAll() {
-        panels.forEach(p => p.hidden = true);
-        buttons.forEach(b => {
-          b.setAttribute('aria-pressed', 'false');
-          b.classList.remove('is-active');
-        });
-      }
+        const wasHidden = panel.hidden;
+        hideAll();
+        panel.hidden = !wasHidden;
 
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.getAttribute('data-target');
-          const panel = document.getElementById(id);
-          if (!panel) return;
+        if (!panel.hidden) {
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-pressed", "true");
 
-          const wasHidden = panel.hidden;
-          hideAll();
-          panel.hidden = !wasHidden;
+          if (id === "gbh-volunteer") loadVolunteerIframeIfNeeded();
+          if (id === "gbh-donate") renderPaypalIfNeeded();
 
-          if (!panel.hidden) {
-            btn.classList.add('is-active');
-            btn.setAttribute('aria-pressed', 'true');
-
-            if (id === "gbh-volunteer") loadVolunteerIframeIfNeeded();
-            if (id === "gbh-donate") renderPaypalIfNeeded();
-
-            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          } else {
-            btn.setAttribute('aria-pressed', 'false');
-          }
-        });
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          btn.setAttribute("aria-pressed", "false");
+        }
       });
-    })();
+    });
+  })();
 
-    // ===== Optional: Rebus auto-drop (fills .rebus-slot markers) =====
-    (function(){
-      const tokens = [
-        { t:"🏠❤️⚡", tip:"home + heart + spark" },
-        { t:"⬛➡️🎨➡️😊", tip:"gray → color → joy" },
-        { t:"👨‍👩‍👧‍👦⏳🤝", tip:"family + time + together" },
-        { t:"🛡️✅💡", tip:"safe + verified + clarity" },
-        { t:"🧩🛠️🧼", tip:"design + build + maintain" },
-        { t:"📚🎲🧸", tip:"books + games + comfort" },
-        { t:"🎯👪🚪", tip:"mission + family + room" },
-        { t:"🔘🦸✨", tip:"button + hero + glow" },
-        { t:"🪢🤝⬆️", tip:"rope + connection + rise" }
-      ];
+  // ===== Optional: Rebus auto-drop (fills .rebus-slot markers) =====
+  (function () {
+    const tokens = [
+      { t: "🏠❤️⚡", tip: "home + heart + spark" },
+      { t: "⬛➡️🎨➡️😊", tip: "gray → color → joy" },
+      { t: "👨‍👩‍👧‍👦⏳🤝", tip: "family + time + together" },
+      { t: "🛡️✅💡", tip: "safe + verified + clarity" },
+      { t: "🧩🛠️🧼", tip: "design + build + maintain" },
+      { t: "📚🎲🧸", tip: "books + games + comfort" },
+      { t: "🎯👪🚪", tip: "mission + family + room" },
+      { t: "🔘🦸✨", tip: "button + hero + glow" },
+      { t: "🪢🤝⬆️", tip: "rope + connection + rise" },
+    ];
 
-      const slots = Array.from(document.querySelectorAll(".rebus-slot"));
-      if (!slots.length) return;
+    const slots = Array.from(document.querySelectorAll(".rebus-slot"));
+    if (!slots.length) return;
 
-      for (let i = tokens.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [tokens[i], tokens[j]] = [tokens[j], tokens[i]];
-      }
+    // Shuffle
+    for (let i = tokens.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [tokens[i], tokens[j]] = [tokens[j], tokens[i]];
+    }
 
-      slots.forEach((slot, idx) => {
-        const tok = tokens[idx % tokens.length];
-        const span = document.createElement("span");
-        span.className = "rebus";
-        span.title = tok.tip;
-        span.textContent = tok.t;
-        slot.replaceWith(span);
-      });
-    })();
-  </script>
+    slots.forEach((slot, idx) => {
+      const tok = tokens[idx % tokens.length];
+      const span = document.createElement("span");
+      span.className = "rebus";
+      span.title = tok.tip;
+      span.textContent = tok.t;
+      slot.replaceWith(span);
+    });
+  })();
+</script>
 </body>
 </html>
