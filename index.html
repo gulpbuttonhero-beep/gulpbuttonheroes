@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SDLZBGK291"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SDLZBGK291');
-  </script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gulp Button Heroes</title>
@@ -22,8 +13,10 @@
   <meta property="og:url" content="https://gulpbuttonheroes.com/" />
   <meta property="og:type" content="website" />
 
-  <!-- ✅ PayPal DONATE SDK (best match for hosted Donate buttons) -->
-  <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+  <!-- PayPal Hosted Buttons SDK (Venmo REMOVED) -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAA9qqMWJrdQ0cGRKR5VbI2goS-hn8FzlWgRjkRvayacYPKtWdgxjhtPXMP2mDzDA40rgvST__T6xfgm20&components=hosted-buttons&currency=USD">
+  </script>
 
   <style>
     :root{
@@ -171,6 +164,7 @@
 
     .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 
+    /* Form Embed (used inside Volunteer panel now) */
     .embed-wrap{
       margin-top:14px;
       border:1px solid var(--border);
@@ -200,6 +194,7 @@
       color:var(--muted);font-weight:650;font-size:13px;
     }
 
+    /* ===== GBH Router (Get Involved Buttons) ===== */
     .gbh-lede { font-size: 1.02rem; line-height: 1.6; margin: 12px 0 18px; color: var(--muted); }
 
     .gbh-router {
@@ -227,16 +222,19 @@
       color:#081124;
     }
 
+    /* Ready glow (slightly stronger so you can actually see it) */
     .gbh-btn.gbh-btn-ready{
       box-shadow: 0 0 0 7px rgba(124,247,212,.14);
     }
 
+    /* Medium warm halo for In-Kind (more than Volunteer/Board, less than Donate) */
     .gbh-btn.gbh-btn-inkind{
       box-shadow:
         0 0 0 9px rgba(255, 204, 102, .16),
         0 10px 24px rgba(255, 204, 102, .08);
     }
 
+    /* Active state glow for whichever button is currently opened */
     .gbh-btn.is-active{
       border-color: transparent;
       background: linear-gradient(135deg, rgba(124,247,212,.95), rgba(138,167,255,.95));
@@ -246,6 +244,7 @@
         0 10px 30px rgba(138,167,255,.10);
     }
 
+    /* If In-Kind is active, keep the active gradient but add a warm edge */
     .gbh-btn.gbh-btn-inkind.is-active{
       box-shadow:
         0 0 0 10px rgba(255, 204, 102, .18),
@@ -283,6 +282,7 @@
       color: var(--muted);
     }
 
+    /* ===== Callouts + FAQ ===== */
     .callout{
       border:1px solid var(--border);
       border-radius:18px;
@@ -320,8 +320,10 @@
       margin:14px 0;
     }
 
+    /* Make hidden panels not take space */
     [hidden]{ display:none !important; }
 
+    /* ===== Rebus (subtle easter eggs) ===== */
     .rebus{
       display:inline-block;
       margin: 0 .18em;
@@ -348,43 +350,6 @@
       color: var(--muted);
     }
     .rebus-slot{ display:inline-block; }
-
-    .dock{
-      margin-top:18px;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px;
-      background:rgba(15,22,48,.60);
-      box-shadow: 0 14px 40px rgba(0,0,0,.22);
-    }
-    .dock h3{margin:0 0 8px;font-size:16px}
-    .dock p{margin:0;color:var(--muted);font-size:14px}
-    .dock-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top:12px;
-    }
-    @media (max-width: 900px){
-      .dock-grid{grid-template-columns:1fr}
-    }
-    .dock-card{
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:12px;
-      background:rgba(18,26,51,.35);
-    }
-    .dock-card b{display:block;margin-bottom:6px}
-    .dock-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-    .btn.warm{
-      border-color: rgba(255,204,102,.25);
-      background: radial-gradient(600px 240px at 20% 20%, rgba(255,204,102,.12), rgba(255,255,255,.04));
-    }
   </style>
 </head>
 
@@ -415,8 +380,6 @@
 
     <div class="hero" id="top">
       <div class="panel">
-        <!-- (UNCHANGED content above...) -->
-
         <h1>
           <span class="dot"></span>Build joy where it’s needed most
           <span class="rebus" title="home + heart + spark">🏠❤️⚡</span>.
@@ -452,12 +415,39 @@
           <a class="btn" href="#mission">Read the mission</a>
         </div>
 
-        <!-- (UNCHANGED mission + dock + etc...) -->
-        <!-- ...keep everything you already have here... -->
-
         <div class="section" id="mission">
-          <!-- your mission section unchanged -->
-          <!-- ... -->
+          <h2>Mission <span class="rebus" title="target + family + room">🎯👪🚪</span></h2>
+          <p class="note">
+            We transform gray, stressful visitation rooms into welcoming, kid-centered spaces that families actually want to be in.
+            Our approach is modular and age-responsive—so rooms don’t become cookie-cutter clones, and upgrades stay durable, safe, and maintainable.
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Make it welcoming</h3>
+              <p>Color, comfort, and layout that feels like a family room—not a checkpoint.</p>
+            </div>
+            <div class="card">
+              <h3>Make it engaging</h3>
+              <p>Creative stations, wall activities, books, and play options that invite connection.</p>
+            </div>
+            <div class="card">
+              <h3>Make it durable</h3>
+              <p>Cleanable materials and a plan for upkeep—not a one-time makeover.</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Why this matters <span class="rebus" title="heart + link + light">❤️🔗💡</span></strong>
+            <p>
+              A visitation room is supposed to support family connection. When a room feels cold, stressful, or “institutional,” it makes a hard situation harder.
+              We focus on practical changes—layout, comfort, kid-safe engagement, and durable materials—so families can spend their time bonding instead of enduring.
+            </p>
+            <div class="mini">
+              We’re building a positive, constructive path: design, build, install, maintain, repeat.
+            </div>
+          </div>
+
           <div class="callout warn">
             <strong>Spirit of reclamation <span class="rebus" title="shield + truth + care">🛡️🧾🌿</span></strong>
             <p>
@@ -468,21 +458,200 @@
               This site is a volunteer and support hub. For legal or case-specific help, please consult a qualified professional or local resources.
             </div>
           </div>
-
-          <div class="dock" id="quick-actions">
-            <!-- your dock unchanged -->
-            <h3>Quick actions <span class="rebus" title="hands + build + go">👐🛠️➡️</span></h3>
-            <p>
-              Want to help right now? Pick one lane: volunteer time, donate materials, or request a facility walkthrough.
-            </p>
-            <!-- ... -->
-          </div>
         </div>
       </div>
 
       <div class="panel">
-        <!-- right column unchanged (how, lubricant, faq, contact...) -->
-        <!-- ... -->
+        <div class="kpi">
+          <div class="item">
+            <div class="num">Phase 1</div>
+            <div class="lbl">Launch a clean, public homepage + volunteer interest intake</div>
+          </div>
+          <div class="item">
+            <div class="num">Phase 2</div>
+            <div class="lbl">Pilot room upgrade: fast, safe improvements that change the feel immediately</div>
+          </div>
+          <div class="item">
+            <div class="num">Phase 3</div>
+            <div class="lbl">Expand with modular features tailored by age group and room needs</div>
+          </div>
+        </div>
+
+        <div class="section" id="how">
+          <h2>How it works <span class="rebus" title="puzzle + build + clean">🧩🛠️🧼</span></h2>
+          <div class="list">
+            <div class="row">
+              <div aria-hidden="true">🧩</div>
+              <div>
+                <b>Design durable modules</b>
+                <small>Safe, cleanable features: activity panels, art surfaces, books, storage, comfort.</small>
+              </div>
+            </div>
+            <div class="row">
+              <div aria-hidden="true">🛠️</div>
+              <div>
+                <b>Build with volunteers + partners</b>
+                <small>Plan, fabricate, and install with real-world use in mind.</small>
+              </div>
+            </div>
+            <div class="row">
+              <div aria-hidden="true">🧼</div>
+              <div>
+                <b>Maintain and iterate</b>
+                <small>Document cleaning routines, replacements, and improvements based on feedback.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== NEW: DCYF LUBRICANT SECTION ===== -->
+        <div class="section" id="lubricant">
+          <h2>DCYF “Lubricant” — the Low-Friction Kit <span class="rebus" title="low friction + safe yes">🧈✅🛡️</span></h2>
+          <p class="note">
+            This is our facility-friendly starter package: small, safe upgrades + clear documentation
+            that helps a site say “yes” without extra burden.
+          </p>
+
+          <div class="list">
+            <div class="row">
+              <div aria-hidden="true">✅</div>
+              <div>
+                <b>Start small, prove value</b>
+                <small>One room, one weekend, or one wall module. No disruption. No drama.</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div aria-hidden="true">🧼</div>
+              <div>
+                <b>Cleanable + durable materials only</b>
+                <small>Wipe-clean surfaces, rounded edges, sturdy mounting, and easy replacement parts.</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div aria-hidden="true">📋</div>
+              <div>
+                <b>Documentation that reduces risk</b>
+                <small>Install notes, cleaning guide, maintenance checklist, and a simple inventory list.</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div aria-hidden="true">🧰</div>
+              <div>
+                <b>Maintenance-first design</b>
+                <small>Nothing “precious.” Everything repairable, replaceable, and easy to sanitize.</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div aria-hidden="true">🤝</div>
+              <div>
+                <b>Respect the facility workflow</b>
+                <small>We coordinate scheduling, approvals, and boundaries—so staff aren’t left holding the bag.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>What we propose first (simple “yes” upgrades) <span class="rebus" title="small start + big change">🐣➡️🌟</span></strong>
+            <p>
+              A calming wall activity panel, a small book/storage nook, wipe-clean seating or soft mats (if allowed),
+              and a “reset kit” that makes cleanup easy after each visit.
+            </p>
+            <div class="mini">
+              We build trust by being predictable: clean install, clean docs, clean handoff.
+            </div>
+          </div>
+
+          <!-- Prefilled email button -->
+          <a
+            class="btn primary"
+            href="mailto:gulpbuttonhero@gmail.com?subject=Gulp%20Button%20Heroes%20—%20Request%20a%20Site%20Walkthrough&body=Hello%20Gulp%20Button%20Heroes%2C%0A%0AI%20found%20your%20site%20and%20would%20like%20to%20request%20a%20short%20walkthrough%20conversation%20about%20the%20DCYF%20Low-Friction%20Kit%20and%20how%20a%20pilot%20upgrade%20could%20work%20in%20a%20visitation%20space.%0A%0AFacility%2FOffice%20name%3A%20%0ALocation%20(city)%3A%20%0ABest%20contact%20name%3A%20%0ABest%20phone%2Femail%3A%20%0A%0AAny%20constraints%20we%20should%20know%20about%20(cleaning%20rules%2C%20mounting%20rules%2C%20scheduling)%3A%20%0A%0AThank%20you%2C%0A"
+            title="Email us with a prefilled request"
+          >
+            Request a Site Walkthrough <span aria-hidden="true">→</span>
+          </a>
+
+          <p class="gbh-fineprint">
+            This email button just pre-fills a message in your mail app. You can edit anything before sending.
+          </p>
+        </div>
+
+        <div class="section" id="faq">
+          <h2>Safety & transparency <span class="rebus" title="shield + checklist + light">🛡️✅💡</span></h2>
+          <p class="note">
+            We’re serious about safety, consent, and responsible installs. These rooms serve families in sensitive situations.
+            Any improvements should be durable, maintainable, and appropriate for the environment.
+          </p>
+
+          <div class="hr"></div>
+
+          <details class="faq">
+            <summary>Are you affiliated with DCYF / CPS?</summary>
+            <p>
+              Not by default. This is a community-led volunteer effort. Any collaboration with agencies or facilities would require
+              formal permission, coordination, and safety standards.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>What kinds of upgrades are you talking about?</summary>
+            <p>
+              Practical, durable improvements: wipe-clean furniture, storage, kid-safe activity panels, books, calming color, art surfaces,
+              modular features designed for easy maintenance and replacement.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>How do you handle donations (money or materials)?</summary>
+            <p>
+              Monetary donations go through the Donate button on this page. In-kind donations (materials/supplies/services) go through the In-Kind form.
+              We aim to be transparent, avoid waste, and prioritize safe, useful items.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>Can I donate used toys or furniture?</summary>
+            <p>
+              Sometimes—if items are clean, safe, and appropriate. Many facilities have strict hygiene and safety rules. The In-Kind form helps us
+              screen items and coordinate what’s actually usable.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>Do you provide legal help or case advocacy?</summary>
+            <p>
+              This project is focused on improving visitation spaces. We can help connect people, share resources, and build community support—but we do not provide legal advice.
+              For case-specific guidance, consult a qualified professional or local services.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>Why do you call it the “DCYF Lubricant”?</summary>
+            <p>
+              It’s shorthand for “reducing friction.” Facilities have real constraints—safety, cleaning, approvals, and time.
+              The Low-Friction Kit is designed to make collaboration easier, not harder.
+            </p>
+          </details>
+        </div>
+
+        <div class="section" id="contact">
+          <h2>Contact <span class="rebus" title="mail + handshake">✉️🤝</span></h2>
+          <p class="note">Email: <span class="mono">gulpbuttonhero@gmail.com</span></p>
+
+          <div class="badges">
+            <span class="badge">Volunteer-ready</span>
+            <span class="badge">Donation-friendly</span>
+            <span class="badge">Modular room upgrades</span>
+          </div>
+
+          <p class="note" style="margin-top:10px">
+            This page is a launch pad. More photos, partner pages, and build modules coming next.
+            <span class="rebus-slot"></span>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -577,24 +746,13 @@
           </a>
         </div>
 
-        <!-- ✅ UPDATED DONATE PANEL -->
         <div id="gbh-donate" class="gbh-panel" hidden>
           <h3>Donate</h3>
           <p>
             Donations fund materials, professional design, safe installation, and durable room features that last.
           </p>
 
-          <!-- Donate SDK renders here -->
-          <div id="donate-button-container" style="margin-top:12px;"></div>
-
-          <!-- Fallback link (works even if JS is blocked) -->
-          <p class="gbh-fineprint" style="margin-top:10px;">
-            If the button doesn’t appear, use this direct link:
-            <a class="gbh-linkbtn" target="_blank" rel="noopener"
-               href="https://www.paypal.com/donate/?hosted_button_id=9LHGEE3D59S68">
-              Donate on PayPal
-            </a>
-          </p>
+          <div id="paypal-container-9LHGEE3D59S68" style="margin-top:12px;"></div>
 
           <p class="gbh-fineprint">
             Prefer in-kind support (materials, fabrication, skilled labor)? Use the In-Kind option above.
@@ -618,6 +776,7 @@
     const VOLUNTEER_EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfLplEwaMZksbAwXuoPvnDkcPQEkwTEcj8QTygBtLx5zzX3VA/viewform?embedded=true";
 
     const BOARD_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuiI0e-yQilbrPIoNO2ghTymytAv89R3dLlXkzTke7OCmoQg/viewform";
+
     const INKIND_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfSOrfOur1i5gGyViGC1RMWjXZNxHtAW47BprWI7BiiU9k9xQ/viewform";
 
     const openFormBtn = document.getElementById("openFormBtn");
@@ -646,26 +805,17 @@
       }
     }
 
-    // ✅ PayPal Donate SDK render (runs when Donate panel opens)
     let paypalRendered = false;
     function renderPaypalIfNeeded() {
       if (paypalRendered) return;
       try {
-        if (window.PayPal && PayPal.Donation && typeof PayPal.Donation.Button === "function") {
-          PayPal.Donation.Button({
-            env: "production",
-            hosted_button_id: "9LHGEE3D59S68",
-            image: {
-              src: "https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif",
-              title: "PayPal - The safer, easier way to pay online!",
-              alt: "Donate with PayPal button"
-            }
-          }).render("#donate-button-container");
-
+        if (window.paypal && paypal.HostedButtons) {
+          paypal.HostedButtons({ hostedButtonId: "9LHGEE3D59S68" })
+            .render("#paypal-container-9LHGEE3D59S68");
           paypalRendered = true;
         }
       } catch (e) {
-        console.warn("PayPal Donate button render failed:", e);
+        console.warn("PayPal button render failed:", e);
       }
     }
 
@@ -706,6 +856,7 @@
       });
     })();
 
+    // ===== Optional: Rebus auto-drop (fills .rebus-slot markers) =====
     (function(){
       const tokens = [
         { t:"🏠❤️⚡", tip:"home + heart + spark" },
