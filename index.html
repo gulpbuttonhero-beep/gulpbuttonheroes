@@ -53,6 +53,41 @@
       box-shadow: var(--shadow);
       position:sticky;top:14px;z-index:50;
 
+      @keyframes hero-glow {
+    0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.4); transform: scale(1); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); transform: scale(1.05); }
+    100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.4); transform: scale(1); }
+}
+
+.btn.primary.hero-trigger {
+    animation: hero-glow 3s infinite ease-in-out;
+    background: linear-gradient(45deg, #FFD700, #FFA500); 
+    border: none;
+    color: #0b1020;
+    font-weight: bold;
+    display: flex; 
+    gap: 15px; 
+    padding: 15px 25px;
+    align-items: center;
+}
+
+.rebus-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.rebus-sub {
+    font-size: 0.35em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-top: 4px;
+    color: #0b1020; /* Dark text for readability on Gold */
+}
+
+
       .hero-trigger {
     position: relative;
     transition: all 0.3s ease;
