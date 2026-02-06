@@ -52,6 +52,26 @@
       background:rgba(18,26,51,.65);backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       position:sticky;top:14px;z-index:50;
+
+      .hero-trigger {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hero-trigger:hover::after {
+    content: attr(data-rebus);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent); /* Using your Gold Button Hero color */
+    color: var(--bg);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
       gap:14px;
     }
     .brand{display:flex;gap:12px;align-items:center;text-decoration:none}
